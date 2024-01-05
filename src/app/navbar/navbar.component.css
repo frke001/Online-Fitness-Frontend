@@ -1,0 +1,26 @@
+.navbar{
+    height: 80px;
+    background-image: linear-gradient(to right, #4452a2, #7067cf, #8f7ceb, #a895f5, #c3afff) !important;
+}
+.offcanvas{
+    background-image: linear-gradient(to top, #4452a2, #7067cf, #8f7ceb, #a895f5, #c3afff) !important;
+}
+.navbar-toggler{
+    /* border: 2px solid #4452a2;
+    border-radius: 20px; */
+    background-color:#8f7ceb;
+}
+.line{
+    display: flex;
+    align-items: center;
+}
+.header-canvas{
+    padding:15px;
+    height: 70px;
+    border-bottom: 1px solid #4452a2;
+    font-weight: 400;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
