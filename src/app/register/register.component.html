@@ -1,0 +1,54 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row border rounded-5 p-3 bg-white shadow box-area reg-box justify-content-center">
+        <div class="row justify-content-center">
+            
+            <div class="header-text mb-4 text-center">
+                <p class="fs-3">Register your account</p>
+                <p class="fs-6">Please insert your personal data for registration.</p>
+            </div>
+            <form class="forma" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <label class="fw-semibold mb-1">Name<span class="star"> *</span></label>
+                <div class="input-group mb-4">
+                    <input type="text" id="name" formControlName="name"
+                        class="form-control form-control-lg bg-light fs-6" placeholder="Enter name">     
+                </div>
+                <label class="fw-semibold mb-1">Surname<span class="star"> *</span></label>
+                <div class="input-group mb-4">
+                    <input type="text" id="surname" formControlName="surname"
+                        class="form-control form-control-lg bg-light fs-6" placeholder="Enter surname">     
+                </div>
+                <label class="fw-semibold mb-1">City<span class="star"> *</span></label>
+                <div class="input-group mb-4">
+                    <input type="text" id="city" formControlName="city"
+                        class="form-control form-control-lg bg-light fs-6" placeholder="Enter city">     
+                </div>
+                <label class="fw-semibold mb-1">E-mail<span class="star"> *</span></label>
+                <div class="input-group mb-4">
+                    <input type="text" id="mail" formControlName="mail"
+                        class="form-control form-control-lg bg-light fs-6" placeholder="Enter e-mail" (input)="onMailInput()">     
+                </div>
+                <label class="fw-semibold mb-1">Username<span class="star"> *</span></label>
+                <div class="input-group mb-4">
+                    <input type="text" id="username" formControlName="username"
+                        class="form-control form-control-lg bg-light fs-6" placeholder="Enter username" (input)="onUsernameInput()">     
+                </div>
+                <label class="fw-semibold mb-1">Password<span class="star"> *</span></label>
+                <div class="input-group mb-4">
+                    <input type="password" formControlName="password"
+                        class="form-control form-control-lg bg-light fs-6" placeholder="Enter password" (input)="onRetypePasswordChange($event)">
+                </div>
+                <label class="fw-semibold mb-1">Retype password<span class="star" > *</span></label>
+                <div class="input-group mb-4">
+                    <input type="password" id="retypePassword" formControlName="retypePassword"
+                        class="form-control form-control-lg bg-light fs-6" placeholder="Enter password" (input)="onRetypePasswordChange($event)">     
+                </div>
+                <div class="input-group mb-4">
+                    <button mat-raised-button color="primary" class="w-100 fs-6" [disabled]="registerForm.invalid || passwordsMissmath || !mailOk || !usernameOk">Register</button>
+                </div>
+            </form>
+            <div class="text-center">
+                <p>Already have account? <a routerLink="/login">Sign in</a> or go to <a routerLink="/home">home</a></p>
+            </div>
+        </div>
+    </div>
+</div>

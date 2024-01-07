@@ -24,3 +24,14 @@
     justify-content: space-between;
     align-items: center;
 }
+.active{
+    border-bottom:  3px solid #7c3aed;
+    transform: scale(1.1);
+    transition: border-bottom 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.nav-link{
+    color: #ececf0 !important;
+}
+.nav-link:hover, .nav-link.active{
+    color: white !important;
+}

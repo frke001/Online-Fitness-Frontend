@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center">
+<span class="badge bg-success fs-3 mb-3">{{rssFeed?.title}}</span>
+</div>
+<div class="desc d-flex card bg-dark">
+<p class="fs-5">{{rssFeed?.description}}<br>
+     <a [href]="rssFeed?.link" target="_blank">Click</a> form more info.</p>
+</div>
+<div class="custom-scrollbar mt-3">
+<div class="container mt-5">
+     @for(item of rssFeed?.rssItems; track item.title){
+          <div class="item-card card mb-3">
+               <div class="card-header fs-4">
+                 {{item.title}}
+               </div>
+               <div class="card-body ">
+                 <h5 class="card-title fs-5">{{item.category}}</h5>
+                 <p class="card-text">{{item.description}}</p>
+                 <a [href]="item.link" target="_blank" class="btn btn-success">Visit for more info</a>
+               </div>
+             </div>
+     }
+</div>
+</div>

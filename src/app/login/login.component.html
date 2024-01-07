@@ -1,0 +1,88 @@
+<!--<div class="vh-100 d-flex align-items-center justify-content-center">
+
+    <div class="card p-5">
+        <p class="card-title text-center mb-3 fs-4">Sign up now</p>
+        <div class="card-body d-flex justify-content-center">
+            
+            <form method="post"
+							class="needs-validation" novalidate>
+							<div class="mb-3">
+                                <div class="form-outline">
+                                    <input type="text" id="form3Example1" class="form-control" />
+                                    <label class="form-label" for="form3Example1">First name</label>
+                                  </div>
+								
+
+								<div class="input-group has-validation">
+									<span class="input-group-text" id="inputGroupPrepend"><img
+										src="images/username.png"></span> <input type="text"
+										class="form-control rounded-end shadow" id="username"
+										name="username" placeholder="Enter username" required>
+									<div class="invalid-feedback">Please insert username.</div>
+									
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="password" class="form-label">Password</label>
+								<div class="input-group has-validation">
+
+									<span class="input-group-text" id="inputGroupPrepend"><img
+										src="images/password.png"></span> <input type="password"
+										class="form-control rounded-end shadow" id="password"
+										name="password" placeholder="Enter password" required>
+									<div class="invalid-feedback">Please insert password.</div>
+									
+								</div>
+							</div>
+							<div>
+								<button  mat-raised-button color="primary" class="w-100" >Login</button>
+							</div>
+							<br><br>
+						</form>
+          </div>
+    </div>
+</div>-->
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+
+    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <div class="pic-box col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
+            <div class="featured-image mb-3">
+                <img src="../../assets/login.png" class="img-fluid" style="width: 250px;">
+            </div>
+            <p class="text-white fs-2">Be Verified</p>
+            <small class="text-white text-wrap text-center">To keep connected with us please login with your personal
+                info.</small>
+        </div>
+
+        <div class="col-md-6 right-box">
+            <div class="row align-items-center">
+                <div class="header-text mb-4">
+                    <p class="fs-3">Hello,Again</p>
+                    <p class="fs-6">We are happy to have you back.</p>
+                </div>
+                <form [formGroup]="loginForm"  (ngSubmit)="onSubmit()" >
+                    <label class="fw-semibold mb-1">Username<span class="star"> *</span></label>
+                    <div class="input-group mb-4">
+                        
+                        <input type="text" id="username" formControlName="username"
+                            class="form-control form-control-lg bg-light fs-6" placeholder="Enter username">     
+                    </div>
+                    <label class="fw-semibold mb-1">Password<span class="star"> *</span></label>
+                    <div class="input-group mb-4">
+                        <input type="password" formControlName="password"
+                            class="form-control form-control-lg bg-light fs-6" placeholder="Enter password">
+                    </div>
+                    <div class="input-group mb-4">
+                        <button mat-raised-button color="primary" [disabled]="loginForm.invalid" class="w-100 fs-6">Login</button>
+                    </div>
+                </form>
+
+                <div class="row">
+                    <p>Don't have account? <a routerLink="/register">Sign Up</a> or go to <a routerLink="/home">home</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

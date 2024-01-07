@@ -1,0 +1,20 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row border rounded-5 p-3 bg-white shadow box-area reg-box justify-content-center box-token">
+        <div class="text-center mb-4">
+            @if(isTokenValid){
+                <img src="../../assets/validToken.png">
+            }@else{
+                <img src="../../assets/invalidToken.png">
+            }
+            
+        </div>
+        <div class="header-text mb-4 text-center">
+            @if(isTokenValid){
+                <p class="fs-3">Your account has been successfully activated.</p>
+            }@else{
+                <p class="fs-3">Activation token is invalid or expired!</p>
+            }
+        </div>
+    </div>
+</div>
+
