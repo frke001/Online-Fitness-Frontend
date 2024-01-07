@@ -61,8 +61,29 @@
                     <p class="fs-3">Hello,Again</p>
                     <p class="fs-6">We are happy to have you back.</p>
                 </div>
-                <form [formGroup]="loginForm"  (ngSubmit)="onSubmit()" >
-                    <label class="fw-semibold mb-1">Username<span class="star"> *</span></label>
+                <form [formGroup]="loginForm">
+                    <label class="fw-semibold">Username<span class="star"> *</span></label>
+                        <mat-form-field color="primary" class="w-100" >
+                            <mat-label>Enter username</mat-label>
+                            <input matInput  formControlName="username" required>
+                            <mat-icon matSuffix>person</mat-icon>
+                            @if (username.invalid) {
+                                <mat-error>Username is required!</mat-error>
+                            }
+                            
+                        </mat-form-field>
+                        <label class="fw-semibold">Password<span class="star"> *</span></label>
+                        <mat-form-field color="primary" class="w-100">
+                            <mat-label>Enter password</mat-label>
+                            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required >
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
+                            @if (password.invalid) {
+                                <mat-error>Password is invalid!</mat-error>
+                            }
+                        </mat-form-field>
+                    <!-- <label class="fw-semibold mb-1">Username<span class="star"> *</span></label>
                     <div class="input-group mb-4">
                         
                         <input type="text" id="username" formControlName="username"
@@ -72,9 +93,9 @@
                     <div class="input-group mb-4">
                         <input type="password" formControlName="password"
                             class="form-control form-control-lg bg-light fs-6" placeholder="Enter password">
-                    </div>
-                    <div class="input-group mb-4">
-                        <button mat-raised-button color="primary" [disabled]="loginForm.invalid" class="w-100 fs-6">Login</button>
+                    </div> -->
+                    <div class="input-group mb-4 mt-3">
+                        <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="onSubmit()" class="w-100 fs-6">Login</button>
                     </div>
                 </form>
 
