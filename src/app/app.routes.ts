@@ -6,6 +6,7 @@ import { FitnessProgramsComponent } from './fitness-programs/fitness-programs.co
 import { ActivityDiaryComponent } from './activity-diary/activity-diary.component';
 import { HomeComponent } from './home/home.component';
 import { ActivateComponent } from './activate/activate.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
 
@@ -22,12 +23,14 @@ export const routes: Routes = [
             {
                 path: 'fitness',
                 title: 'Fitness Programs',
-                component: FitnessProgramsComponent
+                component: FitnessProgramsComponent,
+                canActivate: [authGuard]
             },
             {
                 path: 'diary',
                 title: 'Diary',
-                component: ActivityDiaryComponent
+                component: ActivityDiaryComponent,
+                canActivate: [authGuard]
             },
             {
                 path: '',

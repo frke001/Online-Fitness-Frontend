@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomSnackBarComponent } from '../../custom-snack-bar/custom-snack-bar.component';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class SnackBarService {
 
   constructor(private _snackBar: MatSnackBar) { }
 
-  openSnackBar(message: string, action: string, success: boolean) {
+  openSnackBar(message: string, action: string, success: boolean){
     // this._snackBar.open(message, action, {
     //   horizontalPosition: 'end',
     //   verticalPosition: 'top',
@@ -20,6 +21,20 @@ export class SnackBarService {
       horizontalPosition: 'end',
       verticalPosition: 'top',
       duration: 2000,
+      data: {
+        message: message,
+        action: action,
+        snackBar: this._snackBar,
+        success: success
+      },
+    });
+  }
+  openSnackBarCenter(message: string, action: string, success: boolean){
+
+    this._snackBar.openFromComponent(CustomSnackBarComponent, {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 3000,
       data: {
         message: message,
         action: action,

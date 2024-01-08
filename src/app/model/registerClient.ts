@@ -1,8 +1,9 @@
 export interface RegisterClient{
-    name: string;
-    surname: string;
-    city: string;
-    mail:string;
-    username: string;
-    password: string;
+    name: string | null;
+    surname: string | null;
+    city: string | null;
+    mail:string | null;
+    username: string | null;
+    password: string | null;
+    profileImageId: number | null
 }

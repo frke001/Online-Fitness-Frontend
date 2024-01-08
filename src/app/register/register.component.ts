@@ -9,6 +9,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { ImageService } from '../services/image/image.service';
+import { SnackBarService } from '../services/snackbar/snack-bar.service';
+import { waitForAsync } from '@angular/core/testing';
 
 @Component({
   selector: 'app-register',
@@ -33,12 +35,13 @@ export class RegisterComponent {
   public username = new FormControl(null, [Validators.required]);
   public password;
   public retypePassword;
+  public fileControl = new FormControl(null);
   public hide = true;
   public hideRetype = true;
   public file:any;
   public imageId?: number;
   
-  constructor(private formBuilder: FormBuilder,private authService: AuthService, private imageService: ImageService){
+  constructor(private formBuilder: FormBuilder,private authService: AuthService, private imageService: ImageService, private snackService: SnackBarService){
 
      
     this.password = new FormControl(null, [Validators.required, Validators.minLength(8), this.passwordValidator]);
@@ -52,7 +55,8 @@ export class RegisterComponent {
     this.registerFormStep2 = this.formBuilder.group({
       username: this.username,
       password: this.password,
-      retypePassword: this.retypePassword
+      retypePassword: this.retypePassword,
+      fileControl: this.fileControl
     })
     
   }
@@ -81,49 +85,46 @@ export class RegisterComponent {
     // console.log(this.passwordsMissmath);
   }
   public onSubmit(){
-    console.log("submit");
-    if(this.file){
-      const formData = new FormData();
-      formData.append("image", this.file);
-      //console.log(event.target.files.length);
-      this.imageService.uploadImage(formData).subscribe((res)=>{
-        this.imageId = res;
-      });
-    }
-    var registerClient = {
+    var registerClient: RegisterClient = {
       name: this.name.value,
       surname: this.surname.value,
       city: this.city.value,
       mail: this.mail.value,
       username: this.username.value,
       password: this.password.value,
-      profileImageId: this.imageId
+      profileImageId: null
     }
-    this.authService.register(registerClient);
-    
+    if(this.file){
+      this.imageService.uploadImage(this.file).subscribe((res)=>{
+        //this.imageId = res;
+        debugger
+        console.log(res);
+        registerClient.profileImageId = res;
+        this.file = null;
+        this.authService.register(registerClient);
+        this.snackService.openSnackBar("Registration successful","Close",true);
+        
+      });
+    }else{
+      this.authService.register(registerClient);
+    }
     console.log(registerClient);
+    
+    //console.log(registerClient);
     this.registerFormStep1.reset();
     this.registerFormStep2.reset();
+
   }
 
   onFileUpload(event: any) {
     if(event.target.files.length > 0){
       this.file = event.target.files[0];
-      console.log(this.file);
-      const formData = new FormData();
-      formData.append("image", this.file);
-      //console.log(event.target.files.length);
-      this.imageService.uploadImage(formData).subscribe((res)=>{
-        this.imageId = res;
-      });
     }
   }
 
   public onUsernameInput(){
-    console.log(this.username.value);
     this.authService.checkDetails({
       username: this.username.value,
-      
     }).subscribe((data)=>{
        this.usernameOk = !data;
     });

@@ -3,7 +3,13 @@
     <div class="container-fluid">
       <a class="navbar-brand text-white fs-3 d-flex align-items-center gap-2" href="#"><img src="../../assets/onlineFitness.png">Online fitness</a>
       <div class="d-flex align-items-center gap-4">
-      <button routerLink="/login" mat-raised-button color="accent">Sign in</button>
+        @if(isLoggedIn()){
+          <button mat-raised-button color="accent" data-bs-toggle="modal" data-bs-target="#staticLogout">Logout</button>
+        }@else {
+         
+          <button routerLink="/login" mat-raised-button color="accent">Sign in</button>
+        }
+    
       <button mat-mini-fab class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <img src="../../assets/menu.png">
       </button>
@@ -31,3 +37,23 @@
     </div>
   </nav>
 
+  <div class="modal fade" id="staticLogout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog text-white">
+      <div class="modal-content bg-dark">
+        <div class="modal-header bg-dark">
+          <div class="d-flex justify-content-center align-items-center w-100 gap-2">
+            <img src="../../assets/logoutConfirm.png">
+            <span class="fs-5">Logout confirmation</span>
+        </div>
+          <mat-icon data-bs-dismiss="modal" class="pointer">close</mat-icon>
+        </div>
+        <div class="modal-body fs-5">
+          Are you sure you want to logout?
+        </div>
+        <div class="modal-footer bg-dark">
+          <button type="button" mat-raised-button data-bs-dismiss="modal">Close</button>
+          <button type="button" mat-raised-button color="accent" (click)="onLogout()" data-bs-dismiss="modal">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>

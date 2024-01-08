@@ -10,11 +10,11 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, finalize, of } from 'rxjs';
 import { CustomSnackBarComponent } from '../custom-snack-bar/custom-snack-bar.component';
 import { SnackBarService } from '../services/snackbar/snack-bar.service';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -36,7 +36,7 @@ export class LoginComponent {
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private _snackBar: MatSnackBar
     , private snackBarService: SnackBarService) {
-      this.password = new FormControl(null, [Validators.required, Validators.minLength(8), this.passwordValidator]);
+    this.password = new FormControl(null, [Validators.required, Validators.minLength(8), this.passwordValidator]);
     this.loginForm = this.formBuilder.group({
       password: this.password,
       username: this.username
@@ -67,19 +67,31 @@ export class LoginComponent {
         if (error.status === 403) {
           this.snackBarService.openSnackBar("Your account is blocked", "Close", false);
         }
+        if (error.status === 406) {
+          this.authService.resendActivation({
+            username: this.username.value
+          });
+          this.snackBarService.openSnackBar("Not activated, activation mail is sent again", "Close", true);
+        }
         this.errorHappened = true;
         return of([]);
-      })
+      }),
     ).subscribe((data) => {
-        if (!this.errorHappened) {
-          console.log(data);
-          localStorage.setItem("token", data.token);
-          this.router.navigateByUrl("/home");
-        } else {
-          this.loginForm.reset();
-          this.errorHappened = false;
-        }
+
+      if (!this.errorHappened) {
+        console.log(data);
+        localStorage.setItem("token", data.token);
+        this.router.navigateByUrl("/home");
+      } else {
+        this.loginForm.reset();
+        this.errorHappened = false;
+      }
     });
+    // if(this.resend){
+    //   this.authService.resendActivation({
+    //     username: this.username.value
+    //   });
+    // }
 
   }
 

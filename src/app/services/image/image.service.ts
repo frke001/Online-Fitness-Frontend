@@ -11,11 +11,9 @@ export class ImageService {
   constructor(private http: HttpClient) {
 
   }
-  public uploadImage(request: any):Observable<any> {
-    return this.http.post(this.uploadImgUrl, request, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      }
-    });
+  public uploadImage(url: any): Observable<any> {
+    const formData = new FormData();
+    formData.append("image", url);
+    return this.http.post(this.uploadImgUrl, formData);
   }
 }

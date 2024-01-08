@@ -110,7 +110,7 @@
                         </mat-form-field>
                         <label class="fw-semibold mb-1">Upload profile image</label><br>
                         <div class="mb-3">
-                            <input class="form-control" type="file" id="formFile" (change)="onFileUpload($event)">
+                            <input class="form-control" type="file" id="formFile" (change)="onFileUpload($event)" formControlName="fileControl">
                           </div>
                         <!-- <div  class="btn-file">
                             
