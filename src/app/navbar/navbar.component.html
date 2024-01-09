@@ -1,44 +1,71 @@
 
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar bg-body-tertiary ">
     <div class="container-fluid">
       <a class="navbar-brand text-white fs-3 d-flex align-items-center gap-2" href="#"><img src="../../assets/onlineFitness.png">Online fitness</a>
       <div class="d-flex align-items-center gap-4">
         @if(isLoggedIn()){
-          <button mat-raised-button color="accent" data-bs-toggle="modal" data-bs-target="#staticLogout">Logout</button>
+
+          <button  mat-raised-button color="accent" class="hide-button" data-bs-toggle="modal" data-bs-target="#staticLogout"><img src="../../assets/logout.png" > Logout</button>
+          <div class="avatar hide-avatar">
+          <img [src]="profileImage"   matTooltip="Profile" alt="slika" class="profile rounde-pill pointer hide-img" routerLink="/profile">
+          </div>
         }@else {
          
-          <button routerLink="/login" mat-raised-button color="accent">Sign in</button>
+          <button class="d-flex justify-content-center align-items-center" routerLink="/login" mat-raised-button color="accent">Sign in</button>
         }
     
       <button mat-mini-fab class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <img src="../../assets/menu.png">
+        <img src="../../assets/menu.png" matTooltip="Menu">
       </button>
     </div>
       <div class="offcanvas offcanvas-end fs-4" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="header-canvas">
+          @if(isLoggedIn()){
+            <div class="d-flex align-items-center gap-2">
+            <div class="avatar">
+              <img [src]="profileImage" matTooltip="Profile" alt="slika" class="profile rounde-pill pointer" routerLink="/profile">
+            </div>
+          
+          <div>
+              <p class="fs-5 p-0 m-0">{{getUsername()}}</p>
+          </div>
+          </div>
+          }@else{
           Online fitness
+          }
           <button mat-mini-fab type="button"  class="bg-transparent"  data-bs-dismiss="offcanvas" aria-label="Close"><img src="../../assets/close.png"></button>
         </div>
 
         <div class="offcanvas-body d-flex justify-content-center">
           <ul class="navbar-nav">
             <li class="nav-item mb-3">
-              <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link" >Home</a>
+              <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link d-flex align-items-center  gap-2" ><img src="../../assets/home.png">Home</a>
+            </li>
+            <li class="nav-item mb-3">
+              <a routerLink="/exercises" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link d-flex align-items-center  gap-2" ><img src="../../assets/exercise.png">Exercises</a>
             </li>
             <li class="nav-item mb-3">
               <a routerLink="/fitness" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link" >Fitness</a>
             </li>  
             <li class="nav-item mb-3">
               <a routerLink="/diary" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link" >Diary</a>
-            </li>      
+            </li>  
+                 
           </ul>
+        </div>
+        
+        <div class="offcanvas-footer p-3 d-flex align-items-center justify-content-end">
+          @if(isLoggedIn()){
+            <mat-divider class="hide-divider"></mat-divider>
+            <button  mat-raised-button color="accent"  data-bs-toggle="modal" data-bs-target="#staticLogout"><img src="../../assets/logout.png" > Logout</button>           
+          }
         </div>
       </div>
     </div>
   </nav>
 
-  <div class="modal fade" id="staticLogout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog text-white">
+  <div class="modal fade " id="staticLogout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog text-white modal-dialog-centered">
       <div class="modal-content bg-dark">
         <div class="modal-header bg-dark">
           <div class="d-flex justify-content-center align-items-center w-100 gap-2">
@@ -52,7 +79,7 @@
         </div>
         <div class="modal-footer bg-dark">
           <button type="button" mat-raised-button data-bs-dismiss="modal">Close</button>
-          <button type="button" mat-raised-button color="accent" (click)="onLogout()" data-bs-dismiss="modal">Confirm</button>
+          <button type="button" mat-raised-button color="accent" (click)="onLogout()" data-bs-dismiss="modal" routerLink="/home">Confirm</button>
         </div>
       </div>
     </div>

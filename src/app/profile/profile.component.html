@@ -1,0 +1,141 @@
+
+<div class="container d-flex main-box p-5">
+    <div class="mb-4 d-flex align-items-center gap-4">
+        <div class="avatar">
+            <img [src]="profileImage" matTooltip="Change picture"  alt="slika" class="profile rounde-pill pointer">
+            <input type="file" class="input-pict" matTooltip="Change picture" (change)="onFileUpload($event)">
+        </div>
+        
+        <div>
+            <p class="fs-3">{{name.value + ' ' + surname.value}}</p>
+            <p class="fs-5 text-secondary">{{username}}</p>
+        </div>
+    </div>
+    <div class="card p-5 border">
+        <div class="details-header d-flex justify-content-between align-items-center">
+            <span class="fs-4">Basic details</span>
+            <img src="../../assets/update.png" (click)="onUpdateChange()" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        </div>
+        <mat-divider class="mb-3 mt-1"></mat-divider>
+        <form class="w-100" [formGroup]="profileForm">
+        <div class="row w-100 gx-3 gy-3">
+            <div class="col-sm-12 col-md-6">
+                <label class="fw-semibold">Name<span class="star"> *</span></label>
+                <mat-form-field color="primary" class="w-100" >
+                    <mat-label>Enter name</mat-label>
+                    <input matInput  formControlName="name" required [value]="this.name" [readonly]="!update">
+                    
+                    @if (name.invalid) {
+                        <mat-error>Name is required!</mat-error>
+                    }
+                    
+                </mat-form-field> 
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label class="fw-semibold">Surname<span class="star"> *</span></label>
+                <mat-form-field color="primary" class="w-100" >
+                    <mat-label>Enter surname</mat-label>
+                    <input matInput  formControlName="surname" required [value]="this.surname" [readonly]="!update">
+                    
+                    @if (surname.invalid) {
+                        <mat-error>Surname is required!</mat-error>
+                    }
+                    
+                </mat-form-field> 
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label class="fw-semibold">City<span class="star"> *</span></label>
+                <mat-form-field color="primary" class="w-100" >
+                    <mat-label>Enter city</mat-label>
+                    <input matInput  formControlName="city" required [value]="this.city" [readonly]="!update">
+                    
+                    @if (city.invalid) {
+                        <mat-error>City is required!</mat-error>
+                    }
+                    
+                </mat-form-field> 
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label class="fw-semibold">Mail<span class="star"> *</span></label>
+                <mat-form-field color="primary" class="w-100" >
+                    <mat-label>Enter mail</mat-label>
+                    <input matInput  formControlName="mail" required [value]="this.mail" [readonly]="!update">
+                    
+                    @if (mail.invalid) {
+                        <mat-error>Mail is required!</mat-error>
+                    }                
+                </mat-form-field> 
+            </div>
+            
+            <div class="collapse col-12" id="collapseExample">
+                <button mat-raised-button color="accent" data-bs-toggle="modal" data-bs-target="#staticPasswordUpdate">Change password</button>
+            </div>
+            
+            <div class="collapse col-12" id="collapseExample">
+                <mat-divider></mat-divider>
+                <div class="card card-body border border-0">
+                    <div class="d-flex justify-content-end gap-3">
+                    <button mat-raised-button class="close-btn" (click)="onUpdateChange()" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Close</button>
+                    <button mat-raised-button class="save-btn" (click)="onSave()" [disabled]="profileForm.invalid" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Save</button>
+                </div>
+                </div>
+            </div>
+        </div>
+         </form>
+    </div>
+</div>
+
+<div class="modal fade " id="staticPasswordUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog text-white modal-dialog-centered">
+      <div class="modal-content bg-dark">
+        <div class="modal-header bg-dark">
+          <div class="d-flex justify-content-center align-items-center w-100 gap-2">
+            <img src="../../assets/reset-password.png">
+            <span class="fs-5">Change your password</span>
+        </div>
+          <mat-icon data-bs-dismiss="modal" class="pointer">close</mat-icon>
+        </div>
+        <div class="modal-body p-5">
+            <form [formGroup]="passwordForm">
+                <label class="fw-semibold">Old password<span class="star"> *</span></label>
+                <mat-form-field color="primary" class=" w-100">
+                    <mat-label>Enter password</mat-label>
+                    <input matInput formControlName="oldPassword" [type]="hideOld ? 'password' : 'text'" required >
+                    <button mat-icon-button matSuffix (click)="hideOld = !hideOld" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideOld">
+                        <mat-icon class="text-dark">{{hideOld ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                    @if (oldPassword.invalid) {
+                        <mat-error>Password is invalid!</mat-error>
+                    }
+                </mat-form-field>
+                <label class="fw-semibold">New password<span class="star"> *</span></label>
+                <mat-form-field color="primary" class=" w-100">
+                    <mat-label>Enter password</mat-label>
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required (input)="onRetypePasswordChange($event)">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon class="text-dark">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                    @if (password.invalid) {
+                        <mat-error>Password is invalid!</mat-error>
+                    }
+                </mat-form-field>
+                <label class="fw-semibold">Retype password<span class="star"> *</span></label>
+                <mat-form-field color="primary" class=" w-100">
+                    <mat-label>Enter password</mat-label>
+                    <input matInput formControlName="retypePassword" [type]="hideRetype ? 'password' : 'text'" required (input)="onRetypePasswordChange($event)">
+                    <button mat-icon-button matSuffix (click)="hideRetype = !hideRetype" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRetype">
+                        <mat-icon class="text-dark">{{hideRetype ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                    @if (retypePassword.invalid) {
+                        <mat-error>Password is invalid!</mat-error>
+                    }
+                </mat-form-field>
+            </form>
+        </div>
+        <div class="modal-footer bg-dark">
+          <button type="button" mat-raised-button data-bs-dismiss="modal">Close</button>
+          <button type="button" mat-raised-button color="accent"  data-bs-dismiss="modal" routerLink="/home" [disabled]="passwordForm.invalid || passwordsMissmath" (click)="onUpdatePassword()">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>

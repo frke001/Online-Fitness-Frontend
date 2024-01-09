@@ -7,6 +7,8 @@ import { ActivityDiaryComponent } from './activity-diary/activity-diary.componen
 import { HomeComponent } from './home/home.component';
 import { ActivateComponent } from './activate/activate.component';
 import { authGuard } from './guards/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
+import { ExercisesComponent } from './exercises/exercises/exercises.component';
 
 export const routes: Routes = [
 
@@ -21,6 +23,12 @@ export const routes: Routes = [
                 component: HomeComponent
             },
             {
+                path: 'exercises',
+                title: 'Daili Exercises',
+                component: ExercisesComponent,
+                canActivate: [authGuard]
+            },
+            {
                 path: 'fitness',
                 title: 'Fitness Programs',
                 component: FitnessProgramsComponent,
@@ -30,6 +38,12 @@ export const routes: Routes = [
                 path: 'diary',
                 title: 'Diary',
                 component: ActivityDiaryComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'profile',
+                title: 'Profile',
+                component: ProfileComponent,
                 canActivate: [authGuard]
             },
             {

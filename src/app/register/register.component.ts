@@ -69,20 +69,11 @@ export class RegisterComponent {
     return !hasUpperCase || !hasSpecialCharacter ? { invalidPassword: true } : null;
   };
 
-  // public passwordMissmatch(){
-  //   const password = this.registerForm.controls['password'].value;
-  //   const retypePassword = this.registerForm.controls['retypePassword'].value;
-  //   return password !== retypePassword;
-  // }
 
   onRetypePasswordChange(event : any) {
     const password = this.password.value;
     const retypePassword = this.retypePassword.value;
-    // console.log("P: " + password);
-    // console.log("RP: " + retypePassword);
-    // console.log(event.target.value);
     this.passwordsMissmath = password !== retypePassword;
-    // console.log(this.passwordsMissmath);
   }
   public onSubmit(){
     var registerClient: RegisterClient = {

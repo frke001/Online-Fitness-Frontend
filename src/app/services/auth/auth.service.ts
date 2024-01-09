@@ -53,19 +53,35 @@ export class AuthService {
     const token = localStorage.getItem('token');
     return !!token && !this.isTokenExpired();
   }
+  public isLoggedInWithoutExpire(): boolean{
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
 
   public logout() {
     localStorage.removeItem('token');
   }
   private getExpiryTime() {
-    this.decodeToken();
     return this.decodeToken() ? this.decodeToken().exp : null;
+  }
+
+  public getId() {
+    return this.decodeToken() ? this.decodeToken().jti : null;
+  }
+  public getUsername() {
+    return this.decodeToken() ? this.decodeToken().sub : null;
   }
 
   public isTokenExpired(): boolean {
     const expiryTime: number = this.getExpiryTime();
     if (expiryTime) {
-      return ((1000 * expiryTime) - (new Date()).getTime()) < 5000;
+      if(((1000 * expiryTime) - (new Date()).getTime()) < 5000){
+        this.logout();
+        return true;
+      }
+      else{
+        return false;
+      }
     } else {
       return false;
     }
