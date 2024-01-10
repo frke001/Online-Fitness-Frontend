@@ -1,0 +1,212 @@
+<div class="container">
+    <div class="p-5">
+        <img src="../../../assets/back.png" class="btn" routerLink="/my-fitness-programs">
+    </div>
+    <div class="card border border-0 shadow">
+        <div class="card-body">
+            <div class="custom-scrollbar">
+                <mat-stepper class="stepper" #stepper>
+
+                    <mat-step [stepControl]="formStep1" label="Step 1">
+                        <form [formGroup]="formStep1">
+                            <div class="row">
+
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold">Name<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Enter name</mat-label>
+                                        <input matInput formControlName="name" required>
+                                        <img matSuffix src="../../../assets/categoryName.png" class="me-2">
+                                        @if (name.invalid) {
+                                        <mat-error>Name is required!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold">Price [BAM]<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Enter price</mat-label>
+                                        <input matInput formControlName="price" required>
+                                        <img matSuffix src="../../../assets/price-tag.png" class="me-2">
+                                        @if (price.errors?.['required']) {
+                                        <mat-error>Price is required!</mat-error>
+                                        }
+                                        @if(price.errors?.['pattern']){
+                                        <mat-error>Price must be number!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold">Instructor name<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Enter intructor name</mat-label>
+                                        <input matInput formControlName="instructorName" required>
+                                        <img matSuffix src="../../../assets/instructor.png" class="me-2">
+                                        @if (instructorName.invalid) {
+                                        <mat-error>Instructor name is required!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold">Instructor surname<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Enter instructor surname</mat-label>
+                                        <input matInput formControlName="instructorSurname" required>
+                                        <img matSuffix src="../../../assets/instructor.png" class="me-2">
+                                        @if (instructorSurname.invalid) {
+                                        <mat-error>Instructor surname is required!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold">Difficulty level<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Select difficulty level</mat-label>
+                                        <mat-select matInput formControlName="difficultyLevel" required>
+                                            <mat-option value="Beginner">Beginner</mat-option>
+                                            <mat-option value="Intermediate">Intermediate</mat-option>
+                                            <mat-option value="Expert">Expert</mat-option>
+                                        </mat-select>
+                                        <img matSuffix src="../../../assets/difficulty.png" class="me-2">
+                                        @if (instructorSurname.invalid) {
+                                        <mat-error>Difficulty level is required!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold">Location<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Select location</mat-label>
+                                        <mat-select matInput formControlName="location" required>
+                                            <mat-option value="Online">Online</mat-option>
+                                            <mat-option value="Gym">Gym</mat-option>
+                                            <mat-option value="Park">Park</mat-option>
+                                        </mat-select>
+                                        <img matSuffix src="../../../assets/location.png" class="me-2">
+                                        @if (instructorSurname.invalid) {
+                                        <mat-error>Location is required!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="mt-3">
+                            <button mat-raised-button color="primary" matStepperNext>Next</button>
+                        </div>
+
+                    </mat-step>
+                    <mat-step [stepControl]="formStep2" label="Step 2">
+                        <form [formGroup]="formStep2">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold">Contact<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Enter contact details</mat-label>
+                                        <input matInput formControlName="contact" required>
+                                        <img matSuffix src="../../../assets/telephone.png" class="me-2">
+                                        @if (contact.invalid) {
+                                        <mat-error>Contact is required!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold">Duration in days<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Enter duration</mat-label>
+                                        <input matInput formControlName="duration" required>
+                                        <img matSuffix src="../../../assets/duration.png" class="me-2">
+                                        @if (duration.errors?.['required']) {
+                                        <mat-error>Contact is required!</mat-error>
+                                        }
+                                        @if (duration.errors?.['pattern']) {
+                                        <mat-error>Duration must be number(max 365)!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold">Description<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Enter description</mat-label>
+                                        <textarea matInput formControlName="description" required></textarea>
+                                        <img matSuffix src="../../../assets/duration.png" class="me-2">
+                                        @if (description.errors?.['required']) {
+                                        <mat-error>Description is required!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label class="fw-semibold mb-1">Upload program image<span class="star">
+                                            *</span></label>
+                                    <div>
+                                        <!-- (change)="onFileUpload($event)" -->
+                                        <input class="form-control mb-3" type="file" id="formFile"
+                                            formControlName="fileControl" (change)="onFileUpload($event)">
+                                        <mat-hint>Choose image from file system</mat-hint>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                        <div class="mt-3">
+                            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                            <button mat-raised-button color="primary" class="ms-2" matStepperNext>Next</button>
+                        </div>
+                    </mat-step>
+                    <mat-step [stepControl]="formStep3" label="Step 3">
+                        <form [formGroup]="formStep3">
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <label class="fw-semibold">Category<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Select category</mat-label>
+                                        <mat-select matInput formControlName="category" required (selectionChange)="onCategorySelectionChange($event)">
+                                            @for (cat of categories; track cat.id) {
+                                                <mat-option [value]="cat.id">{{cat.name}}</mat-option>
+                                            }
+                                        </mat-select>
+                                        <img matSuffix src="../../../assets/categoryName.png" class="me-2">
+                                        @if (category.invalid) {
+                                            <mat-error>Category is required!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <hr>
+                                <div class="col-12">
+                                    <p class="fw-semibold fs-5">
+                                        Attributes:
+                                    </p>
+                                </div>
+                                @for (attr of attributes; track attr.id) {
+                                    <div class="col-sm-12 col-md-6 mb-3">
+                                        <label class="fw-semibold">{{attr.name}}<span class="star"> *</span></label>
+                                        <mat-form-field color="primary" class="w-100">
+                                            <mat-label>Enter attribute value</mat-label>
+                                            <input matInput formControlName="{{attr.name}}" required>
+                                            <img matSuffix src="../../../assets/attribute.png" class="me-2">
+                                        </mat-form-field>
+                                        @if(attr.name.invalid) {
+                                            <mat-error>Attribute is required!</mat-error>
+                                        }
+                                    </div>
+                                }
+                                <!-- <div class="col-sm-12 col-md-6 mb-3">
+                                <label class="fw-semibold">Location<span class="star"> *</span></label>
+                                <mat-form-field color="primary" class="w-100">
+                                <mat-label>Select location</mat-label>
+                                <input matInput required>
+                                <img matSuffix src="../../../assets/location.png" class="me-2">
+                        </mat-form-field>
+                            </div> -->
+                            </div>
+                        </form>
+                        <div class="mt-3">
+                            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                            <button mat-raised-button color="primary" type="submit" class="ms-2" (click)="onSubmit()"
+                                [disabled]="formStep1.invalid || formStep2.invalid || formStep3.invalid">Create</button>
+                        </div>
+                    </mat-step>
+                </mat-stepper>
+            </div>
+        </div>
+    </div>
+</div>

@@ -50,23 +50,23 @@
             <div class="featured-image mb-3">
                 <img src="../../assets/login.png" class="img-fluid" style="width: 250px;">
             </div>
-            <p class="text-white fs-2">Be Verified</p>
-            <small class="text-white text-wrap text-center">To keep connected with us please login with your personal
+            <p class="text-white fs-2 fw-semibold">Be Verified</p>
+            <small class="text-white text-wrap text-center fw-semibold">To keep connected with us please login with your personal
                 info.</small>
         </div>
 
         <div class="col-md-6 right-box">
             <div class="row align-items-center">
                 <div class="header-text mb-4">
-                    <p class="fs-3">Hello,Again</p>
-                    <p class="fs-6">We are happy to have you back.</p>
+                    <p class="fs-3 fw-semibold">Hello,Again</p>
+                    <p class="fs-6 fw-semibold">We are happy to have you back.</p>
                 </div>
                 <form [formGroup]="loginForm">
                     <label class="fw-semibold">Username<span class="star"> *</span></label>
                         <mat-form-field color="primary" class="w-100" >
                             <mat-label>Enter username</mat-label>
                             <input matInput  formControlName="username" required>
-                            <mat-icon matSuffix>person</mat-icon>
+                            <img matSuffix src="../../assets/name.png" class="me-2">
                             @if (username.invalid) {
                                 <mat-error>Username is required!</mat-error>
                             }
@@ -77,10 +77,14 @@
                             <mat-label>Enter password</mat-label>
                             <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required >
                             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+                                <img matSuffix src="{{hide ? '../../assets/eyeOf.png' : '../../assets/eye.png'}}" class="me-2">
                               </button>
-                            @if (password.invalid) {
-                                <mat-error>Password is invalid!</mat-error>
+                            @if (password.errors?.['required']) {
+                                <mat-error>Password is required!</mat-error>
+                            }
+                            @if (password.errors?.['pattern']) {
+                                <mat-error>Password contains at least one big<br>one small letter and number</mat-error>
                             }
                         </mat-form-field>
                     <!-- <label class="fw-semibold mb-1">Username<span class="star"> *</span></label>
@@ -100,7 +104,7 @@
                 </form>
 
                 <div class="row">
-                    <p>Don't have account? <a routerLink="/register">Sign Up</a> or go to <a routerLink="/home">home</a></p>
+                    <p class="fw-semibold">Don't have account? <a routerLink="/register">Sign Up</a> or go to <a routerLink="/home">home</a></p>
                 </div>
             </div>
         </div>

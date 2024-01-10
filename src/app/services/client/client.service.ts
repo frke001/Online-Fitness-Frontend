@@ -36,4 +36,8 @@ export class ClientService {
   public updatePassword(request: any):Observable<any>{
     return this.http.put(this.baseUrl + this.authService.getId() + '/change-password', request);
   }
+
+  insertFitnessProgram(request: any): Observable<any>{
+    return this.http.post(this.baseUrl + this.authService.getId() + '/fitness-programs', request);
+  }
 }

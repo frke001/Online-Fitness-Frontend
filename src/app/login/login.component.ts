@@ -59,32 +59,26 @@ export class LoginComponent {
     this.authService.login({
       username: this.username.value,
       password: this.password.value
-    }).pipe(
-      catchError((error) => {
-        if (error.status === 401) {
+    }).subscribe({
+
+      next: (data) => {
+        localStorage.setItem("token", data.token);
+        this.router.navigateByUrl("/home");
+
+      },
+      error: (err) => {
+        if (err.status === 401) {
           this.snackBarService.openSnackBar("Invalid credentials", "Close", false);
         }
-        if (error.status === 403) {
+        if (err.status === 403) {
           this.snackBarService.openSnackBar("Your account is blocked", "Close", false);
         }
-        if (error.status === 406) {
+        if (err.status === 406) {
           this.authService.resendActivation({
             username: this.username.value
           });
           this.snackBarService.openSnackBar("Not activated, activation mail is sent again", "Close", true);
         }
-        this.errorHappened = true;
-        return of([]);
-      }),
-    ).subscribe((data) => {
-
-      if (!this.errorHappened) {
-        console.log(data);
-        localStorage.setItem("token", data.token);
-        this.router.navigateByUrl("/home");
-      } else {
-        this.loginForm.reset();
-        this.errorHappened = false;
       }
     });
     // if(this.resend){

@@ -1,24 +1,6 @@
-.desc{
-    text-align: center;
-    line-height: 25px;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    border-radius: 15px;
-    border: 1px solid #4452a2;
-    color: white;
-}
-.card-header{
-    background-image: linear-gradient(to right, #4452a2, #7067cf, #8f7ceb, #a895f5, #c3afff) !important;
-    color: white;
-}
-.card-body{
-    background-color: #EEF5FF;
-}
-/* styles.css */
 .custom-scrollbar {
     overflow-y: auto;
-    height: 60vh; /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
+    height: 58vh; /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
     scrollbar-width: thin; /* Mozilla Firefox */
     scrollbar-color: #4452a2 #f9faff; /* Mozilla Firefox */
   }
@@ -35,4 +17,24 @@
   .custom-scrollbar::-webkit-scrollbar-track {
     background-color: #f9faff; /* Boja pozadine trake */
   }
-  
+
+  .card{
+    transition: transform 0.3s;
+  }
+  .card:hover{
+        transform: scale(1.05);
+        cursor: pointer;
+  }
+  .img-card{
+    height: 200px;
+    background-position: center;
+  }
+  .img-card:hover{
+    filter: blur(2px);
+
+  }
+  @media screen and (min-width: 600px) {
+    .add-btn{
+        text-align: end;
+    }
+  }

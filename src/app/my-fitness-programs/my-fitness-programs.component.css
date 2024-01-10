@@ -1,0 +1,25 @@
+ 
+/* #created-tab.active, #created-tab:hover{
+	background-color: #4452a2 !important;
+	color: white !important;
+	cursor: pointer !important;
+}
+#created-tab{
+	color: white !important;
+}
+#in-progress-tab.active, #in-progress-tab:hover{
+	background-color: #8080ff!important;
+	color: white!important;
+	cursor: pointer!important;
+}
+#in-progress-tab{
+	color: white;
+}
+#finished-tab.active, #finished-tab:hover{
+	background-color: #8080ff!important;
+	color: white!important;
+	cursor: pointer!important;
+}
+#finished-tab{
+	color: white;
+}  */

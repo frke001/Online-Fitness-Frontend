@@ -1,7 +1,7 @@
-<div class="container p-5">
+<div class="p-5">
     <div class="header d-flex justify-content-between align-items-center mb-3">
-        <span class="badge bg-success fs-3">Daily exercises</span>
-        <select class="form-select" matTooltip="Select muscle group" (change)="onChange($event)">
+        <span class="badge bg-success fs-3 fw-semibold">Daily exercises</span>
+        <select class="form-select fw-semibold" matTooltip="Select muscle group" (change)="onChange($event)">
             @for (item of muscles; track $index) {
             @if($index === 0){
             <option [value]="item" selected>{{item.charAt(0).toUpperCase() + item.slice(1)}}</option>
@@ -15,7 +15,7 @@
     <div class="custom-scrollbar mt-3">
         <div class="container mt-5">
             @for (exercise of exercises; track $index) {
-            <div class="card mb-5 borde border-0">
+            <div class="card mb-4 borde border-0 shadow">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <span class="fs-4">{{exercise?.name}}</span>
                     @if(exercise.difficulty === 'beginner'){
@@ -28,13 +28,17 @@
                     
                 </div>
                 <div class="card-body rounded-bottom">
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
                         <p class="fs-6 type">Type: {{exercise.type}}</p>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
                         <p class="fs-6 equipment">Equipement: {{exercise.equipment}}</p>
+                    </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-center">
                         @if(indexes[$index]){
-                        <a mat-raised-button color="primary" data-bs-toggle="collapse" href="#{{$index}}"
+                        <a mat-raised-button class="bg-success text-white" data-bs-toggle="collapse" href="#{{$index}}"
                             role="button" aria-expanded="false" aria-controls="collapseExample"
                             (click)="onCollapse($index)">View instructions</a>
                         }@else {

@@ -16,7 +16,7 @@ import { catchError, of } from 'rxjs';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, MatDividerModule, MatTooltipModule],
+  imports: [ReactiveFormsModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, MatDividerModule, MatTooltipModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -42,7 +42,7 @@ export class ProfileComponent {
   public hide = true;
   public hideRetype = true;
   public hideOld = true;
-  constructor( private imageService: ImageService, private authService: AuthService, private formBuilder: FormBuilder, private clientService: ClientService, private snackBarService:SnackBarService) {
+  constructor(private imageService: ImageService, private authService: AuthService, private formBuilder: FormBuilder, private clientService: ClientService, private snackBarService: SnackBarService) {
     this.profileForm = formBuilder.group({
       name: this.name,
       surname: this.surname,
@@ -53,27 +53,34 @@ export class ProfileComponent {
     this.retypePassword = new FormControl(null, [Validators.required, Validators.minLength(8), this.passwordValidator]);
     this.oldPassword = new FormControl(null, [Validators.required, Validators.minLength(8), this.passwordValidator]);
     this.passwordForm = formBuilder.group({
-        password: this.password,
-        retypePassword: this.retypePassword,
-        oldPassword: this.oldPassword
+      password: this.password,
+      retypePassword: this.retypePassword,
+      oldPassword: this.oldPassword
     })
-    this.clientService.getDetails().pipe(
-      catchError((err)=>{
+    this.clientService.getDetails()
+      .subscribe({
+        next: (data) => {
+          console.log(data)
+          this.name.setValue(data.name);
+          this.surname.setValue(data.surname);
+          this.city.setValue(data.city);
+          this.mail.setValue(data.mail);
+          snackBarService.openSnackBar("Successful profile details fetch!", "Close", true);
+        },
+        error: (err) => {
           snackBarService.openSnackBar("Unsuccessful profile details fetch!", "Close", false);
-          return of([]);
-      })
-    ).subscribe((data) => {
-      console.log(data)
-      this.name.setValue(data.name);
-      this.surname.setValue(data.surname);
-      this.city.setValue(data.city);
-      this.mail.setValue(data.mail);
-    })
+        }
+      });
     this.username = authService.getUsername();
-    this.clientService.getProfileImageId().subscribe((res)=>{
-      if(res){
-        let image = this.imageService.downloadImage(res);
-        this.profileImage =  image ? image : this.defaultImageUrl;
+    this.clientService.getProfileImageId().subscribe({
+      next: (res) => {
+        if (res) {
+          let image = this.imageService.downloadImage(res);
+          this.profileImage = image ? image : this.defaultImageUrl;
+        }
+      },
+      error: (err) => {
+        this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
       }
     })
   }
@@ -82,11 +89,11 @@ export class ProfileComponent {
     const password = control.value;
     const hasUpperCase = /[A-Z]/.test(password);
     const hasSpecialCharacter = /[0-9]/.test(password);
-  
+
     return !hasUpperCase || !hasSpecialCharacter ? { invalidPassword: true } : null;
   };
 
-  onRetypePasswordChange(event : any) {
+  onRetypePasswordChange(event: any) {
     const password = this.password.value;
     const retypePassword = this.retypePassword.value;
     this.passwordsMissmath = password !== retypePassword;
@@ -98,29 +105,29 @@ export class ProfileComponent {
       city: this.city.value,
       mail: this.mail.value
     }
-      this.clientService.updateProfile(request).pipe(
-        catchError((err)=>{
-          this.snackBarService.openSnackBar("Action unsuccessful!","Close",false)
-          return of([]);
-        })
-      ).subscribe((data)=>{
-          this.snackBarService.openSnackBar("Profile updated successfully!","Close",true);
-      });
-      this.update = false;
+    this.clientService.updateProfile(request).pipe(
+      catchError((err) => {
+        this.snackBarService.openSnackBar("Action unsuccessful!", "Close", false)
+        return of([]);
+      })
+    ).subscribe((data) => {
+      this.snackBarService.openSnackBar("Profile updated successfully!", "Close", true);
+    });
+    this.update = false;
   }
 
   onFileUpload(event: any) {
-    if(event.target.files.length > 0){
+    if (event.target.files.length > 0) {
       let file = event.target.files[0];
-      if(file){
-        this.imageService.uploadImage(file).subscribe((res)=>{
+      if (file) {
+        this.imageService.uploadImage(file).subscribe((res) => {
           let image = this.imageService.downloadImage(res);
-          this.profileImage =  image ? image : this.defaultImageUrl;
+          this.profileImage = image ? image : this.defaultImageUrl;
 
-          this.clientService.updateProfileImage(res).subscribe((res)=>{
-            if(!res){
+          this.clientService.updateProfileImage(res).subscribe((res) => {
+            if (!res) {
               this.snackBarService.openSnackBar("Unsuccessfull action!", "Close", false);
-            }else{
+            } else {
               this.snackBarService.openSnackBar("Profile picture successfully changed!", "Close", true);
               window.location.reload();
             }
@@ -139,11 +146,11 @@ export class ProfileComponent {
       oldPassword: this.oldPassword.value,
       newPassword: this.password.value
     }
-    this.clientService.updatePassword(request).subscribe((data)=>{
-      if(data){
-        this.snackBarService.openSnackBar("Password changed successfully!","Close",true);
-      }else{
-        this.snackBarService.openSnackBar("Action unsuccessful!","Close",false);
+    this.clientService.updatePassword(request).subscribe((data) => {
+      if (data) {
+        this.snackBarService.openSnackBar("Password changed successfully!", "Close", true);
+      } else {
+        this.snackBarService.openSnackBar("Action unsuccessful!", "Close", false);
       }
     })
   }

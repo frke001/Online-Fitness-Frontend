@@ -1,8 +1,8 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="row border rounded-5 p-3 bg-white shadow box-area reg-box justify-content-center">
             <div class="header-text mb-4 text-center">
-                <p class="fs-3">Register your account</p>
-                <p class="fs-6">Please insert your personal data for registration.</p>
+                <p class="fs-3 fw-semibold">Register your account</p>
+                <p class="fs-6 fw-semibold">Please insert your personal data for registration.</p>
             </div>
             <mat-stepper class="stepper" #stepper>
                 <mat-step [stepControl]="registerFormStep1" label="Step 1">
@@ -11,7 +11,7 @@
                         <mat-form-field color="primary" class="w-100">
                             <mat-label>Enter name</mat-label>
                             <input matInput  formControlName="name" required>
-                            <mat-icon matSuffix>badge</mat-icon>
+                            <img matSuffix src="../../assets/name.png" class="me-2">
                             @if (name.invalid) {
                                 <mat-error>Name is required!</mat-error>
                             }
@@ -20,7 +20,7 @@
                         <mat-form-field color="primary" class=" w-100">
                             <mat-label>Enter surname</mat-label>
                             <input matInput formControlName="surname" required>
-                            <mat-icon matSuffix>badge</mat-icon>
+                            <img matSuffix src="../../assets/name.png" class="me-2">
                             @if (surname.invalid) {
                                 <mat-error>Surname is required!</mat-error>
                             }
@@ -29,7 +29,7 @@
                         <mat-form-field color="primary" class=" w-100">
                             <mat-label>Enter city</mat-label>
                             <input matInput formControlName="city" required>
-                            <mat-icon matSuffix>apartment</mat-icon>
+                            <img matSuffix src="../../assets/city.png" class="me-2">
                             @if (city.invalid) {
                                 <mat-error>City is required!</mat-error>
                             }
@@ -41,7 +41,7 @@
                             @if (mail.invalid) {
                                 <mat-error>Mail is invalid!</mat-error>
                             }
-                            <mat-icon matSuffix>mail</mat-icon>
+                            <img matSuffix src="../../assets/mail.png" class="me-2">
                         </mat-form-field>
                         <!-- <label class="fw-semibold mb-1">Name<span class="star"> *</span></label>
                         <div class="input-group mb-4">
@@ -78,7 +78,7 @@
                         <mat-form-field color="primary" class="w-100">
                             <mat-label>Enter username</mat-label>
                             <input matInput  formControlName="username" required (input)="onUsernameInput()">
-                            <mat-icon matSuffix>person</mat-icon>
+                            <img matSuffix src="../../assets/username.png" class="me-2">
                             @if (username.invalid) {
                                 <mat-error>Username is required!</mat-error>
                             }
@@ -91,7 +91,7 @@
                             <mat-label>Enter password</mat-label>
                             <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required (input)="onRetypePasswordChange($event)">
                             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <img matSuffix src="{{hide ? '../../assets/eyeOf.png' : '../../assets/eye.png'}}" class="me-2">
                               </button>
                             @if (password.invalid) {
                                 <mat-error>Password is invalid!</mat-error>
@@ -102,7 +102,7 @@
                             <mat-label>Enter password</mat-label>
                             <input matInput formControlName="retypePassword" [type]="hideRetype ? 'password' : 'text'" required (input)="onRetypePasswordChange($event)">
                             <button mat-icon-button matSuffix (click)="hideRetype = !hideRetype" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRetype">
-                                <mat-icon>{{hideRetype ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <img matSuffix src="{{hideRetype ? '../../assets/eyeOf.png' : '../../assets/eye.png'}}" class="me-2">
                               </button>
                             @if (retypePassword.invalid) {
                                 <mat-error>Password is invalid!</mat-error>
@@ -147,7 +147,7 @@
                 </mat-step>
             </mat-stepper>
             <div class="text-center mt-3">
-                <p>Already have account? <a routerLink="/login">Sign in</a> or go to <a routerLink="/home">home</a></p>
+                <p class="fw-semibold">Already have account? <a routerLink="/login">Sign in</a> or go to <a routerLink="/home">home</a></p>
             </div>
         </div>
     </div>

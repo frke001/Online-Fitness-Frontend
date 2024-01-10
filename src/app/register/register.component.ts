@@ -23,23 +23,23 @@ export class RegisterComponent {
 
 
 
-  public registerFormStep1: FormGroup;
-  public registerFormStep2: FormGroup;
-  public passwordsMissmath: boolean = true;
-  public mailOk: boolean = true;
-  public usernameOk: boolean = true;
-  public name = new FormControl(null, [Validators.required]);
-  public surname = new FormControl(null, [Validators.required]);
-  public city = new FormControl(null, [Validators.required]); 
-  public mail = new FormControl(null, [Validators.required, Validators.email]);
-  public username = new FormControl(null, [Validators.required]);
-  public password;
-  public retypePassword;
-  public fileControl = new FormControl(null);
-  public hide = true;
-  public hideRetype = true;
-  public file:any;
-  public imageId?: number;
+  registerFormStep1: FormGroup;
+  registerFormStep2: FormGroup;
+  passwordsMissmath: boolean = true;
+  mailOk: boolean = true;
+  usernameOk: boolean = true;
+  name = new FormControl(null, [Validators.required]);
+  surname = new FormControl(null, [Validators.required]);
+  city = new FormControl(null, [Validators.required]); 
+  mail = new FormControl(null, [Validators.required, Validators.email]);
+  username = new FormControl(null, [Validators.required]);
+  password;
+  retypePassword;
+  fileControl = new FormControl(null);
+  hide = true;
+  hideRetype = true;
+  file:any;
+  imageId?: number;
   
   constructor(private formBuilder: FormBuilder,private authService: AuthService, private imageService: ImageService, private snackService: SnackBarService){
 
@@ -61,7 +61,7 @@ export class RegisterComponent {
     
   }
 
-  public passwordValidator = (control: AbstractControl): { [key: string]: boolean } | null => {
+  passwordValidator = (control: AbstractControl): { [key: string]: boolean } | null => {
     const password = control.value;
     const hasUpperCase = /[A-Z]/.test(password);
     const hasSpecialCharacter = /[0-9]/.test(password);
@@ -75,7 +75,7 @@ export class RegisterComponent {
     const retypePassword = this.retypePassword.value;
     this.passwordsMissmath = password !== retypePassword;
   }
-  public onSubmit(){
+  onSubmit(){
     var registerClient: RegisterClient = {
       name: this.name.value,
       surname: this.surname.value,
@@ -86,22 +86,21 @@ export class RegisterComponent {
       profileImageId: null
     }
     if(this.file){
-      this.imageService.uploadImage(this.file).subscribe((res)=>{
-        //this.imageId = res;
-        debugger
-        console.log(res);
+      this.imageService.uploadImage(this.file).subscribe({
+        next: (res)=>{
         registerClient.profileImageId = res;
         this.file = null;
         this.authService.register(registerClient);
         this.snackService.openSnackBar("Registration successful","Close",true);
+        },
+        error: (err)=>{
+          this.snackService.openSnackBar("Error during communication with server!","Close",false);
+        }
         
       });
     }else{
       this.authService.register(registerClient);
     }
-    console.log(registerClient);
-    
-    //console.log(registerClient);
     this.registerFormStep1.reset();
     this.registerFormStep2.reset();
 
@@ -113,14 +112,14 @@ export class RegisterComponent {
     }
   }
 
-  public onUsernameInput(){
+  onUsernameInput(){
     this.authService.checkDetails({
       username: this.username.value,
     }).subscribe((data)=>{
        this.usernameOk = !data;
     });
   }
-  public onMailInput(){
+  onMailInput(){
     this.authService.checkDetails({
       mail: this.mail.value,
     }).subscribe((data)=>{

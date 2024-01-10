@@ -25,9 +25,10 @@
 .equipment{
     font-weight: 500;
 }
+
 .custom-scrollbar {
     overflow-y: auto;
-    height: 65vh; /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
+    height: 70vh; /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
     scrollbar-width: thin; /* Mozilla Firefox */
     scrollbar-color: #4452a2 #f9faff; /* Mozilla Firefox */
   }
@@ -43,4 +44,10 @@
   
   .custom-scrollbar::-webkit-scrollbar-track {
     background-color: #f9faff; /* Boja pozadine trake */
+  }
+
+  @media screen and (min-width: 761px) {
+    .equipment{
+        text-align: end;
+    }
   }

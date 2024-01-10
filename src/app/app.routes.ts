@@ -9,6 +9,8 @@ import { ActivateComponent } from './activate/activate.component';
 import { authGuard } from './guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { ExercisesComponent } from './exercises/exercises/exercises.component';
+import { MyFitnessProgramsComponent } from './my-fitness-programs/my-fitness-programs.component';
+import { AddProgramComponent } from './my-fitness-programs/add-program/add-program.component';
 
 export const routes: Routes = [
 
@@ -26,6 +28,18 @@ export const routes: Routes = [
                 path: 'exercises',
                 title: 'Daili Exercises',
                 component: ExercisesComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'my-fitness-programs',
+                title: 'My Fitness Programs',
+                component: MyFitnessProgramsComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'add-program',
+                title: 'New Fitness Program',
+                component: AddProgramComponent,
                 canActivate: [authGuard]
             },
             {
