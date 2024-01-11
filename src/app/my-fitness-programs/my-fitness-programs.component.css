@@ -1,25 +1,19 @@
- 
-/* #created-tab.active, #created-tab:hover{
-	background-color: #4452a2 !important;
-	color: white !important;
-	cursor: pointer !important;
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: white;
+    background-color: #8f7ceb;
 }
-#created-tab{
-	color: white !important;
+
+.nav-pills .nav-link {
+	color: #4452a2;
+    border-radius: 10px;
+	font-size: 20px;
+	font-weight: 500;
 }
-#in-progress-tab.active, #in-progress-tab:hover{
-	background-color: #8080ff!important;
-	color: white!important;
-	cursor: pointer!important;
-}
-#in-progress-tab{
+.nav-pills:hover .nav-link:hover {
+	background-color: #8f7ceb;
 	color: white;
+    border-radius: 10px;
+	font-size: 20px;
+	font-weight: 500;
 }
-#finished-tab.active, #finished-tab:hover{
-	background-color: #8080ff!important;
-	color: white!important;
-	cursor: pointer!important;
-}
-#finished-tab{
-	color: white;
-}  */

@@ -1,6 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     background-image: linear-gradient(to top, #a6b5ff, #c0ceff, #d4d9ff, #e8e8ff, #f9faff) !important;
-    background-repeat: no-repeat;  }
+    background-repeat: no-repeat;
+}
+
+
+.snackbar-success {
+    .mdc-snackbarsurface {
+        background-color: #198754 !important;
+    }
+}
+
+.snackbar-unsuccess {
+    .mdc-snackbarsurface {
+        background-color: #dc3545 !important;
+    }
+}

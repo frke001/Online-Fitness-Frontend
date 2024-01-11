@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { ClientService } from '../../services/client/client.service';
+import { SnackBarService } from '../../services/snackbar/snack-bar.service';
+import { ImageService } from '../../services/image/image.service';
 
 @Component({
   selector: 'app-created',
@@ -12,8 +15,22 @@ import { RouterLink } from '@angular/router';
 })
 export class CreatedComponent {
 
- 
+  fitnessPrograms: Array<any> = [];
+  defaultImage: string = '../../../assets/defaultFitnes.jpeg'
+  constructor(private clientService: ClientService, private snackBarService: SnackBarService, private imageService: ImageService){
+    this.clientService.getAllFitnessPrograms().subscribe({
+      next: (data)=>{
+          this.fitnessPrograms = data;
+          this.snackBarService.openSnackBar("Successfully fetched programs!", "Close", true);
+      },
+      error: (err)=>{
+        this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
+      }
+    })
+  }
 
-  
-
+  getImage(id: any): string{
+    let image = this.imageService.downloadImage(id);
+    return image ? image : this.defaultImage;
+  }
 }

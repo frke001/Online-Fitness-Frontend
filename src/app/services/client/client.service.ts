@@ -40,4 +40,8 @@ export class ClientService {
   insertFitnessProgram(request: any): Observable<any>{
     return this.http.post(this.baseUrl + this.authService.getId() + '/fitness-programs', request);
   }
+
+  getAllFitnessPrograms(): Observable<any>{
+      return this.http.get(this.baseUrl + this.authService.getId() + '/fitness-programs')
+  }
 }

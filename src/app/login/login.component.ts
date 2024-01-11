@@ -79,6 +79,7 @@ export class LoginComponent {
           });
           this.snackBarService.openSnackBar("Not activated, activation mail is sent again", "Close", true);
         }
+        this.loginForm.reset();
       }
     });
     // if(this.resend){

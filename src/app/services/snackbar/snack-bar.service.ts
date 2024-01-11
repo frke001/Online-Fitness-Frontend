@@ -20,7 +20,8 @@ export class SnackBarService {
     this._snackBar.openFromComponent(CustomSnackBarComponent, {
       horizontalPosition: 'end',
       verticalPosition: 'top',
-      duration: 2000,
+      duration: 3000,
+      panelClass: success ? 'snackbar-success' : 'snackbar-unsuccess',
       data: {
         message: message,
         action: action,
@@ -35,6 +36,7 @@ export class SnackBarService {
       horizontalPosition: 'center',
       verticalPosition: 'top',
       duration: 3000,
+      panelClass: success ? 'snackbar-success' : 'snackbar-unsuccess',
       data: {
         message: message,
         action: action,

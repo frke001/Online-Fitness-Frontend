@@ -20,10 +20,18 @@
 
   .card{
     transition: transform 0.3s;
+    /*height: 350px;*/
+  }
+
+  .truncate {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 70px;
   }
   .card:hover{
-        transform: scale(1.05);
-        cursor: pointer;
+    transform: scale(1.05);
+        
   }
   .img-card{
     height: 200px;
