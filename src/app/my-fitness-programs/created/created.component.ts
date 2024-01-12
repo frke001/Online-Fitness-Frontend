@@ -15,22 +15,43 @@ import { ImageService } from '../../services/image/image.service';
 })
 export class CreatedComponent {
 
+
   fitnessPrograms: Array<any> = [];
   defaultImage: string = '../../../assets/defaultFitnes.jpeg'
-  constructor(private clientService: ClientService, private snackBarService: SnackBarService, private imageService: ImageService){
+  constructor(private clientService: ClientService, private snackBarService: SnackBarService, private imageService: ImageService) {
     this.clientService.getAllFitnessPrograms().subscribe({
-      next: (data)=>{
-          this.fitnessPrograms = data;
-          this.snackBarService.openSnackBar("Successfully fetched programs!", "Close", true);
+      next: (data) => {
+        this.fitnessPrograms = data;
+        this.snackBarService.openSnackBar("Successfully fetched programs!", "Close", true);
       },
-      error: (err)=>{
+      error: (err) => {
         this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
       }
     })
   }
 
-  getImage(id: any): string{
+  getImage(id: any): string {
     let image = this.imageService.downloadImage(id);
     return image ? image : this.defaultImage;
+  }
+
+  onDelete(id: any) {
+
+    this.clientService.deleteFitnessProgram(id).subscribe({
+      next: (data) => {
+        if (data) {
+          this.fitnessPrograms = this.fitnessPrograms.filter(program => {
+            return program.id !== id;
+          })
+          this.snackBarService.openSnackBar("Fitness program successfully deleted!", "Close", true);
+        } else {
+          this.snackBarService.openSnackBar("Fitness program unsuccessfully deleted!", "Close", false);
+        }
+      },
+      error: (err) => {
+        this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
+      }
+    })
+
   }
 }

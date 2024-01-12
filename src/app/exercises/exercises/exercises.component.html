@@ -38,9 +38,9 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-center">
                         @if(indexes[$index]){
-                        <a mat-raised-button class="bg-success text-white" data-bs-toggle="collapse" href="#{{$index}}"
+                        <a mat-raised-button class="bg-success text-white d-flex align-items-center" data-bs-toggle="collapse" href="#{{$index}}"
                             role="button" aria-expanded="false" aria-controls="collapseExample"
-                            (click)="onCollapse($index)">View instructions</a>
+                            (click)="onCollapse($index)"><img src="../../../assets/instructions.png">View instructions</a>
                         }@else {
                         <a mat-raised-button class="close-btn text-white" data-bs-toggle="collapse"
                             href="#{{$index}}" role="button" aria-expanded="false"

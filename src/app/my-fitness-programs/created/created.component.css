@@ -20,7 +20,7 @@
 
   .card{
     transition: transform 0.3s;
-    /*height: 350px;*/
+    height: 350px;
   }
 
   .truncate {
@@ -44,5 +44,28 @@
   @media screen and (min-width: 600px) {
     .add-btn{
         text-align: end;
+    }
+    .view-btn{
+      display: flex;
+      justify-content: start;
+    }
+    .del-btn{
+      display: flex;
+      justify-content: end;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .add-btn{
+        text-align: end;
+    }
+    .view-btn{
+      display: flex;
+      justify-content: center;
+    }
+    .del-btn{
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
     }
   }

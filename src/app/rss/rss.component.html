@@ -13,9 +13,11 @@
                  {{item.title}}
                </div>
                <div class="card-body rounded-bottom">
-                 <h5 class="card-title fs-5 fw-semibold">{{item.category}}</h5>
+                 <h5 class="card-title fs-5 fw-semibold d-flex align-items-center">{{item.category}}&nbsp;<img src="../../assets/categoryName.png"></h5>
                  <p class="card-text fw-semibold">{{item.description}}</p>
-                 <a [href]="item.link" target="_blank" class="btn btn-success fw-semibold">Visit for more info</a>
+                 <div class="d-flex justify-content-start">
+                 <a [href]="item.link" target="_blank" class="btn btn-success fw-semibold d-flex align-items-center fs-6"><img src="../../assets/visitPage.png">&nbsp;Visit for more info</a>
+                    </div>
                </div>
              </div>
      }

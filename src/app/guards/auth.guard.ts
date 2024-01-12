@@ -13,5 +13,5 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
     result = false;
   }
   //return inject(AuthService).isLoggedIn()? true : (inject(SnackBarService).openSnackBar("","",false) && router.navigate(["/home"]));
-  return result? true : router.navigate(["/home"]);
+  return result? true : router.navigate(["/login"]);
 };

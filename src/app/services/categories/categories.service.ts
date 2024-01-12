@@ -14,4 +14,7 @@ export class CategoriesService {
   getAllCategories() : Observable<any>{
     return this.http.get(this.baseUrl);
   }
+  getAllCategoryNames() : Observable<any>{
+    return this.http.get(this.baseUrl + '/names');
+  }
 }

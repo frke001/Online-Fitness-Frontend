@@ -1,0 +1,45 @@
+<div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+    <div class="card border border-0 shadow">
+        <div class="card-body" >
+            <form [formGroup]="participateForm">
+                <label class="fw-semibold">Payment type<span class="star"> *</span></label>
+                <mat-form-field color="primary" class="w-100">
+                    <mat-label>Select difficulty level</mat-label>
+                    <mat-select matInput formControlName="paymentType" required (selectionChange)="onSelectionChange($event)">
+                        <mat-option value="Card">Card</mat-option>
+                        <mat-option value="PayPal">PayPal</mat-option>
+                        <mat-option value="On location">On location</mat-option>
+                    </mat-select>
+                    <img matSuffix src="../../../assets/difficulty.png" class="me-2">
+                    @if (paymentType.invalid) {
+                    <mat-error>Difficulty level is required!</mat-error>
+                    }
+                </mat-form-field>
+                @if(paymentType.value === 'Card'){
+                <label class="fw-semibold">Card number<span class="star"> *</span></label>
+                <mat-form-field color="primary" class="w-100">
+                    <mat-label>Enter card number</mat-label>
+                    <input matInput formControlName="cardNumber" required>
+                    <img matSuffix src="../../../assets/comments.png" class="me-2">
+                    @if (cardNumber.invalid) {
+                    <mat-error>Card number is required!</mat-error>
+                    }
+                </mat-form-field>
+                }@if(paymentType.value === 'PayPal'){
+                <label class="fw-semibold">E-mail<span class="star"> *</span></label>
+                <mat-form-field color="primary" class="w-100">
+                    <mat-label>Enter e-mail</mat-label>
+                    <input matInput formControlName="mail" required>
+                    <img matSuffix src="../../../assets/comments.png" class="me-2">
+                    @if (mail.invalid) {
+                    <mat-error>E-mail is required!</mat-error>
+                    }
+                </mat-form-field>
+                }
+            </form>
+            <div>
+                <button mat-raised-button color="primary" class="fs-6" routerLink="/fitness-programs/{{id}}" (click)="onParticipate()" [disabled]="participateForm.invalid">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

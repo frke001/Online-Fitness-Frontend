@@ -121,4 +121,7 @@
       display: flex;
       justify-content: center;
     }
+    .yt{
+      height: 200px;
+    }
   }

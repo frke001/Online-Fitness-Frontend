@@ -1,1 +1,114 @@
-<p>fitness-programs works!</p>
+<div class="container-fluid p-5">
+    <div class="header mb-4">
+        <span class="badge bg-success fs-3 fw-semibold">Fitness programs</span>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xl-6 mt-1">
+                <div class="row gx-0">
+                    <div class="col-9">
+                        <div class="input-group mb-3 gx-0">
+                            <span class="input-group-text" id="basic-addon1"><img src="../../assets/search.png"></span>
+                            <input type="text" class="form-control" placeholder="Enter search term"
+                                aria-label="Username" aria-describedby="basic-addon1" [formControl]="searchTerm"
+                                (input)="onChanges()">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <select class="form-select term bg-success text-white" aria-label="Default select example"
+                            [formControl]="searchOption" (change)="onChanges()">
+                            <option hidden selected value="default">Search term</option>
+                            <option value="name">Name</option>
+                            <option value="price">Price</option>
+                            <option value="days">Duration</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xl-2 mt-1">
+
+                <select class="form-select cat text-white" aria-label="Default select example"
+                    [formControl]="categoryOption" (change)="onChanges()">
+                    <option selected value="default">All Categories</option>
+                    @for (category of categoryNames; track category.id) {
+                    <option [value]="category.name">{{category.name}}</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6 col-xl-2 mt-1">
+                <select class="form-select diff text-white" aria-label="Default select example"
+                    [formControl]="difficultyOption" (change)="onChanges()">
+                    <option selected class="opt" value="default">All difficulties</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Expert">Expert</option>
+                </select>
+            </div>
+            <div class="col-md-6 col-xl-2 mt-1">
+                <select class="form-select loc text-white" aria-label="Default select example"
+                    [formControl]="locationOption" (change)="onChanges()">
+                    <option selected value="default">All locations</option>
+                    <option value="Gym">Gym</option>
+                    <option value="Park">Park</option>
+                    <option value="Online">Online</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="custom-scrollbar mt-3">
+        <div class="container-fluid">
+            <div class="row gx-4 gy-4">
+                @for (program of fitnessPrograms; track program.id) {
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+                    <div class="card border border-0 shadow">
+                        <img [src]="getImage(program.imageId)" class="img-card card-img-top img-fluid"
+                            alt="Image of program">
+                        <div class="card-body">
+                            <h5 class="card-title fs-4 mb-3">{{program.name}}</h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="fw-semibold fs-6 m-0"><img src="../../assets/price-tag.png"> {{program.price}} BAM</p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-end">
+                                    <p class="fw-semibold fs-6 m-0"><img src="../../assets/location.png"> {{program.location}}</p>
+                                </div>
+                             </div>
+                             <div class="row mt-3 d-flex align-items-center">
+                                <div class="col-sm-6 col-md-6 col-xl-6 diff-badge">
+                                    @if (program.difficultyLevel === 'Beginner') {
+                                        <span class="badge bg-success fw-semibold fs-6 m-0">{{program.difficultyLevel}}</span>
+                                    }@else if(program.difficultyLevel === 'Intermediate'){
+                                        <span class="badge bg-warning fw-semibold fs-6 m-0">{{program.difficultyLevel}}</span>
+                                    }@else {
+                                        <span class="badge bg-danger fw-semibold fs-6 m-0">{{program.difficultyLevel}}</span>
+                                    }
+                                    
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-xl-6 view-btn">
+                                    <button mat-raised-button
+                                    class="bg-success text-white fs-6 d-flex align-items-center" routerLink="/fitness-programs/{{program.id}}"><img
+                                        src="../../../assets/details.png">&nbsp;See details</button>
+                                </div>
+                            </div>
+                            <!-- <div class="d-flex justify-content-between align-items-center mt-3">
+                                <p class="fw-semibold fs-6 m-0"><img src="../../assets/difficulty.png"> {{program.difficultyLevel}}</p>
+                                <button mat-raised-button
+                                    class="bg-success text-white fs-6 d-flex align-items-center"><img
+                                        src="../../../assets/details.png">&nbsp;See details</button>
+                                
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div>
+        <mat-paginator #paginator class="demo-paginator paginator-custom mt-4" (page)="handlePageEvent($event)"
+            [length]="length" [pageSize]="pageSize" [disabled]="disabled" [showFirstLastButtons]="showFirstLastButtons"
+            [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []" [hidePageSize]="hidePageSize"
+            [pageIndex]="pageIndex" aria-label="Select page">
+        </mat-paginator>
+    </div>
+</div>

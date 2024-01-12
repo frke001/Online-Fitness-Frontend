@@ -10,6 +10,11 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-image: linear-gradient(to top, #a6b5ff, #c0ceff, #d4d9ff, #e8e8ff, #f9faff) !important;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    flex: 1; 
+    overflow: auto;
+    min-height: 100%;
 }
 
 

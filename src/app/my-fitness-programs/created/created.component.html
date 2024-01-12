@@ -18,10 +18,16 @@
                             alt="Image of program">
                         <div class="card-body">
                             <h5 class="card-title fs-4 mb-3">{{program.name}}</h5>
-                            <p class="fs-6 fw-semibold truncate">{{program.description}}</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="fw-semibold fs-6">Price: {{program.price}} BAM</span>
-                                <button mat-raised-button class="bg-success text-white" routerLink="/fitness-programs/{{program.id}}">See details</button>
+                            <p class="fw-semibold fs-6 m-0 d-flex align-items-center"><img src="../../../assets/price-tag.png">{{program.price}} BAM</p>
+                            <div class="row mt-3">
+                                <div class="col-sm-6 col-md-6 col-xl-6 view-btn">
+                                    <button mat-raised-button class="bg-success text-white fs-6 d-flex align-items-center" routerLink="/fitness-programs/{{program.id}}"><img src="../../../assets/details.png">&nbsp;See details</button>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-xl-6 del-btn">
+                                    <button mat-raised-button class="bg-danger text-white fs-6 d-flex align-items-center" (click)="onDelete(program.id)"><img src="../../../assets/delete.png">&nbsp;Delete</button>
+                                </div>
+                                
+                                
                             </div>
                         </div>
                     </div>

@@ -44,4 +44,16 @@ export class ClientService {
   getAllFitnessPrograms(): Observable<any>{
       return this.http.get(this.baseUrl + this.authService.getId() + '/fitness-programs')
   }
+
+  deleteFitnessProgram(id: any): Observable<any>{
+    return this.http.delete(this.baseUrl + this.authService.getId() + '/fitness-programs/' + id);
+  }
+
+  participateInProgram(programId: any): Observable<any>{
+    return this.http.post(this.baseUrl + this.authService.getId() + '/fitness-programs/' + programId + '/participate',{});
+  }
+
+  isParticipating(programId: any): Observable<any>{
+    return this.http.get(this.baseUrl + this.authService.getId() + '/fitness-programs/' + programId + '/participate');
+  }
 }

@@ -1,8 +1,7 @@
-
-    <div class="p-5 pb-0 pt-3">
-        <img matTooltip="Go back" src="../../../assets/back.png" class="btn" routerLink="/my-fitness-programs">
-    </div>
-    <div class="container">
+<div class="p-5 pb-0 pt-3">
+    <img matTooltip="Go back" src="../../../assets/back.png" class="btn" routerLink="{{getBackUrl()}}">
+</div>
+<div class="container d-flex justify-content-center">
     <div class="card border border-0 shadow">
         <img src="{{programImageUrl}}" class="img-card card-img-top img-fluid" alt="Image of program">
         <div class="custom-scrollbar">
@@ -11,14 +10,18 @@
                     <div class="col-sm-6 col-md-6 col-xl-6 title">
                         <p class="fs-3 fw-semibold m-0 p-0">{{fitnessProgram?.name}}</p>
                     </div>
+                    @if(isLoggedIn()){
                     <div class="col-sm-6 col-md-6 col-xl-6 controls">
                         <div class="d-flex align-items-center gap-2">
-                            <button mat-raised-button color="primary d-flex"><img src="../../../assets/participate.png">
+                            @if(!isParticipating){
+                            <button mat-raised-button color="primary d-flex" routerLink="/participate/{{fitnessProgram?.id}}"><img src="../../../assets/participate.png">
                                 Participate</button>
+                            }
                             <button mat-raised-button color="accent d-flex"><img src="../../../assets/subscribe.png">
                                 Subscribe</button>
                         </div>
                     </div>
+                    }
                 </div>
                 <hr>
                 <div class="tabs">
@@ -36,18 +39,20 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pills-comments-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-comments" type="button" role="tab" aria-controls="pills-comments"
-                                aria-selected="false">Comments</button>
+                                aria-selected="false">Questions</button>
                         </li>
                     </ul>
-                    <hr>
+
                 </div>
+                <hr>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-info" role="tabpanel"
                         aria-labelledby="pills-info-tab" tabindex="0">
                         <div>
                             <p class="fs-4 fw-semibold m-0 p-0 d-flex align-items-center gap-1">Description <img
                                     src="../../../assets/description.png"></p>
-                            <p class="fs-6 fw-semibold m-0 p-0 text-center ps-md-5 pe-md-5 ps-sm-0 pe-sm-0 mt-2 mb-3 text-secondary">
+                            <p
+                                class="fs-6 fw-semibold m-0 p-0 text-center ps-md-5 pe-md-5 ps-sm-0 pe-sm-0 mt-2 mb-3 text-secondary">
                                 {{fitnessProgram?.description}}</p>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -61,7 +66,8 @@
                             <div class="d-flex justify-content-center">
                                 <div>
                                     <p class="fs-5 fw-semibold m-0 p-0 d-flex align-items-center gap-1 text-secondary">
-                                        <img src="../../../assets/name.png">{{fitnessProgram?.instructorName + ' ' + fitnessProgram?.instructorSurname}}
+                                        <img src="../../../assets/name.png">{{fitnessProgram?.instructorName + ' ' +
+                                        fitnessProgram?.instructorSurname}}
                                     </p>
 
                                     <p class="fs-5 fw-semibold m-0 p-0 d-flex align-items-center gap-1 text-secondary">
@@ -79,14 +85,14 @@
                             <div class="col-sm-6 col-md-6 col-xl-6 difficulty">
                                 <div class="fs-5 fw-semibold m-0 p-0 d-flex align-items-center gap-1"><img
                                         src="../../../assets/difficulty.png">
-                                        @if(fitnessProgram?.difficultyLevel === 'Beginner'){
-                                            <span class="badge bg-success fs-3">{{fitnessProgram?.difficultyLevel}}</span>
-                                        }@else if(fitnessProgram?.difficultyLevel === 'Intermediate'){
-                                            <span class="badge bg-warning fs-3">{{fitnessProgram?.difficultyLevel}}</span>
-                                        }@else{
-                                            <span class="badge bg-danger fs-3">{{fitnessProgram?.difficultyLevel}}</span>
-                                        }
-           
+                                    @if(fitnessProgram?.difficultyLevel === 'Beginner'){
+                                    <span class="badge bg-success fs-3">{{fitnessProgram?.difficultyLevel}}</span>
+                                    }@else if(fitnessProgram?.difficultyLevel === 'Intermediate'){
+                                    <span class="badge bg-warning fs-3">{{fitnessProgram?.difficultyLevel}}</span>
+                                    }@else{
+                                    <span class="badge bg-danger fs-3">{{fitnessProgram?.difficultyLevel}}</span>
+                                    }
+
                                     <div>
                                     </div>
                                 </div>
@@ -97,8 +103,8 @@
                         tabindex="0">
                         <div class="row">
                             <div class="col-sm-6 col-md-6 col-xl-6">
-                                <p class="fs-5 fw-semibold m-0 p-0 d-flex align-items-center gap-1">{{fitnessProgram?.categoryName}}<img
-                                        src="../../../assets/categoryName.png"></p>
+                                <p class="fs-5 fw-semibold m-0 p-0 d-flex align-items-center gap-1">
+                                    {{fitnessProgram?.categoryName}}<img src="../../../assets/categoryName.png"></p>
                             </div>
                             <div class="col-sm-6 col-md-6 col-xl-6 attr-btn">
                                 <button mat-raised-button class="bg-success text-white fs-6" data-bs-toggle="collapse"
@@ -113,11 +119,9 @@
                                     <div>
                                         <ul class="list-group list-group-flush ps-5 pe-5 text-center">
                                             @for (attr of fitnessProgram?.categoryAttributeValues; track attr.id) {
-                                                <li class="list-group-item fw-semibold fs-6">{{attr.name}}:&nbsp;<span
+                                            <li class="list-group-item fw-semibold fs-6">{{attr.name}}:&nbsp;<span
                                                     class="fw-semibold text-secondary fs-6">{{attr.value}}</span></li>
                                             }
-                                            
-
                                         </ul>
                                     </div>
                                 </div>
@@ -127,8 +131,11 @@
                             <div class="col-12 d-flex justify-content-center">
                                 <p class="fs-3 fw-semibold d-flex align-items-center"><img
                                         src="../../../assets/location.png">
-                                    {{fitnessProgram?.location}}:<span class="fs-3 fw-semibold text-secondary">&nbsp;{{fitnessProgram?.concreteLocation}}</span></p>
+                                    {{fitnessProgram?.location}}<span
+                                        class="fs-3 fw-semibold text-secondary">&nbsp;{{fitnessProgram?.concreteLocation}}</span>
+                                </p>
                             </div>
+                            @if(isLoggedIn()){
                             @if (fitnessProgram?.location === 'Park' || fitnessProgram?.location === 'Gym') {
                             <div class="col-12 d-flex justify-content-center">
                                 <p class="fs-3 fw-semibold d-flex align-items-center"><img
@@ -147,15 +154,15 @@
                             <div class="collapse" id="youtube">
                                 <div class="col-12 d-flex justify-content-center">
 
-                                    <iframe class="yt" width="80%" height="500px"
-                                        [src]="ytUrl">
+                                    <iframe class="yt" width="80%" height="500px" [src]="ytUrl">
                                     </iframe>
                                 </div>
                             </div>
                             }
+                            }
                             <div class="col-12 dur">
                                 <p class="fs-5 text-secondary fw-semibold">
-                                    Duration: {{fitnessProgram?.days}} days
+                                    Program duration: {{fitnessProgram?.days}} days
                                 </p>
                             </div>
                         </div>
@@ -164,8 +171,9 @@
                     <div class="tab-pane fade" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab"
                         tabindex="0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <p class="fw-semibold fs-4 m-0">Comments: </p>
-                            <button mat-raised-button class="bg-success text-white fs-6" data-bs-toggle="modal" data-bs-target="#addComment">Comment</button>
+                            <p class="fw-semibold fs-4 m-0">Questions: </p>
+                            <button mat-raised-button class="bg-success text-white fs-6" data-bs-toggle="modal"
+                                data-bs-target="#addComment">Comment</button>
                         </div>
 
                         <div class="container d-flex justify-content-center">
@@ -197,7 +205,7 @@
         <div class="modal-content bg-dark">
             <div class="modal-header bg-dark">
                 <div class="d-flex justify-content-center align-items-center w-100 gap-2">
-                    <img src="../../assets/comments.png">
+                    <img src="../../../assets/comments.png">
                     <span class="fs-5">Add new comment</span>
                 </div>
                 <mat-icon data-bs-dismiss="modal" class="pointer">close</mat-icon>
@@ -213,9 +221,9 @@
                         <mat-error>Grade must be between 1 and 5!</mat-error>
                         }
                         @if (grade.errors?.['required']) {
-                            <mat-error>Grade is required!</mat-error>
+                        <mat-error>Grade is required!</mat-error>
                         }
-                       
+
                     </mat-form-field>
                     <label class="fw-semibold">Comment<span class="star"> *</span></label>
                     <mat-form-field color="primary" class="w-100">

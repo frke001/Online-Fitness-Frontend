@@ -13,6 +13,7 @@ import { MyFitnessProgramsComponent } from './my-fitness-programs/my-fitness-pro
 import { AddProgramComponent } from './my-fitness-programs/add-program/add-program.component';
 import { loginGuard } from './guards/login/login.guard';
 import { FitnessProgramComponent } from './fitnessProgram/fitness-program/fitness-program.component';
+import { ParticipateComponent } from './participate/participate.component';
 
 export const routes: Routes = [
 
@@ -45,16 +46,14 @@ export const routes: Routes = [
                 canActivate: [authGuard]
             },
             {
-                path: 'fitness',
+                path: 'fitness-programs',
                 title: 'Fitness Programs',
                 component: FitnessProgramsComponent,
-                canActivate: [authGuard]
             },
             {
                 path: 'fitness-programs/:id',
                 title: 'Fitness Program',
                 component: FitnessProgramComponent,
-                canActivate: [authGuard]
             },
             {
                 path: 'diary',
@@ -66,6 +65,12 @@ export const routes: Routes = [
                 path: 'profile',
                 title: 'Profile',
                 component: ProfileComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'participate/:id',
+                title: 'Program participation',
+                component: ParticipateComponent,
                 canActivate: [authGuard]
             },
             {

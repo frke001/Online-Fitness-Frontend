@@ -7,12 +7,16 @@ import { Observable } from 'rxjs';
 })
 export class FitnessProgramService {
 
-  baseUrl: string = 'http://localhost:9000/api/v1/fitness-programs/';
+  baseUrl: string = 'http://localhost:9000/api/v1/fitness-programs';
   constructor(private http: HttpClient) {
 
    }
 
    getFitnessProgram(id: any): Observable<any>{
-    return this.http.get(this.baseUrl + id);
+    return this.http.get(this.baseUrl + '/' + id);
+   }
+
+   getFitnessPrograms(request: any, page: any, size: any): Observable<any>{
+      return this.http.post(this.baseUrl + `?page=${page}&size=${size}`, request);
    }
 }
