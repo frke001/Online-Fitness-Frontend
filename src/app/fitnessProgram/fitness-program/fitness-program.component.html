@@ -1,8 +1,8 @@
-<div class="p-5 pb-0 pt-3">
-    <img matTooltip="Go back" src="../../../assets/back.png" class="btn" routerLink="{{getBackUrl()}}">
-</div>
-<div class="container d-flex justify-content-center">
-    <div class="card border border-0 shadow">
+<!-- <div class="p-5 pb-0 pt-3">
+    <img matTooltip="Go back" src="../../../assets/back.png" class="btn" routerLink="..">
+</div> -->
+<div class="container d-flex justify-content-center pt-5">
+    <div class="card border border-0 shadow mt-5">
         <img src="{{programImageUrl}}" class="img-card card-img-top img-fluid" alt="Image of program">
         <div class="custom-scrollbar">
             <div class="card-body">
@@ -14,11 +14,11 @@
                     <div class="col-sm-6 col-md-6 col-xl-6 controls">
                         <div class="d-flex align-items-center gap-2">
                             @if(!isParticipating){
-                            <button mat-raised-button color="primary d-flex" routerLink="/participate/{{fitnessProgram?.id}}"><img src="../../../assets/participate.png">
+                            <button mat-raised-button color="primary d-flex fs-6" routerLink="/participate/{{fitnessProgram?.id}}"><img src="../../../assets/participate.png">
                                 Participate</button>
                             }
-                            <button mat-raised-button color="accent d-flex"><img src="../../../assets/subscribe.png">
-                                Subscribe</button>
+                            <!-- <button mat-raised-button color="accent d-flex"><img src="../../../assets/subscribe.png">
+                                Subscribe</button> -->
                         </div>
                     </div>
                     }
@@ -172,23 +172,32 @@
                         tabindex="0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <p class="fw-semibold fs-4 m-0">Questions: </p>
-                            <button mat-raised-button class="bg-success text-white fs-6" data-bs-toggle="modal"
-                                data-bs-target="#addComment">Comment</button>
+                            
+                            <button mat-raised-button class="bg-success text-white fs-6 d-flex align-items-center" data-bs-toggle="modal"
+                                data-bs-target="#addComment"><img src="../../../assets/question-mark.png">{{(getId() == fitnessProgram?.clientId) ? 'Reply' : 'Ask Question'}}</button>
                         </div>
-
-                        <div class="container d-flex justify-content-center">
-                            <div class="card border border-0 shadow">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <p class="fw-semibold fs-6 m-0">Username</p>
-                                    <p class="fw-semibold fs-4 m-0 d-flex align-items-center"> 5&nbsp;<img
-                                            src="../../../assets/star.png"></p>
+          
+                        <div class="d-flex justify-content-center flex-wrap">
+                            @for (q of questions; track q.id) {
+                            <div class="card border border-0 shadow mb-3 question">
+                                <div class="card-header d-flex align-items-center">
+                                    <div class="avatar">
+                                        <img [src]="getUserImage(q.clientSenderProfileImageId)" matTooltip="Profile" alt="slika" class="profile rounde-pill">
+                                      </div>
+                                    <p class="fw-semibold fs-6 m-0">&nbsp;{{q.clientSenderUsername}}{{q.clientSenderId == fitnessProgram?.clientId? ' (Owner)' : ''}}</p>
+                                  
                                 </div>
                                 <div class="card-body comment-body">
-                                    <p class="fw-semibold fs-6 m-0 text-secondary text-center">Komentar</p>
+                                    <p class="fw-semibold fs-6 m-0 text-secondary">{{q.question}}</p>
                                 </div>
                             </div>
-
-                        </div>
+                        }@empty {
+                            <div class="d-flex align-items-center flex-column">
+                            <p class="fs-4 fw-semibold">Trenutno nema pitanja</p>
+                            <img src="../../../assets/noQuestions.png">
+                            </div>
+                        }
+                    </div>
                     </div>
 
                 </div>
@@ -206,41 +215,28 @@
             <div class="modal-header bg-dark">
                 <div class="d-flex justify-content-center align-items-center w-100 gap-2">
                     <img src="../../../assets/comments.png">
-                    <span class="fs-5">Add new comment</span>
+                    <span class="fs-5">{{(getId() == fitnessProgram?.clientId) ? 'Add new reply' : 'Add new question'}}</span>
                 </div>
                 <mat-icon data-bs-dismiss="modal" class="pointer">close</mat-icon>
             </div>
             <div class="modal-body p-5">
                 <form [formGroup]="commentForm">
-                    <label class="fw-semibold">Grade<span class="star"> *</span></label>
+                    <label class="fw-semibold">{{(getId() == fitnessProgram?.clientId) ? 'Reply' : 'Question'}}<span class="star"> *</span></label>
                     <mat-form-field color="primary" class="w-100">
-                        <mat-label>Enter grade</mat-label>
-                        <input matInput formControlName="grade" required>
-                        <img matSuffix src="../../../assets/star.png" class="me-2">
-                        @if (grade.errors?.['pattern']) {
-                        <mat-error>Grade must be between 1 and 5!</mat-error>
-                        }
-                        @if (grade.errors?.['required']) {
-                        <mat-error>Grade is required!</mat-error>
-                        }
-
-                    </mat-form-field>
-                    <label class="fw-semibold">Comment<span class="star"> *</span></label>
-                    <mat-form-field color="primary" class="w-100">
-                        <mat-label>Enter comment</mat-label>
-                        <textarea matInput formControlName="comment" required></textarea>
+                        <mat-label>{{(getId() == fitnessProgram?.clientId) ? 'Enter reply' : 'Enter question'}}</mat-label>
+                        <textarea matInput formControlName="question" required></textarea>
                         <img matSuffix src="../../../assets/comments.png" class="me-2">
-                        @if (comment.invalid) {
-                        <mat-error>Comment is required!</mat-error>
+                        @if (question.invalid) {
+                        <mat-error>{{(getId() == fitnessProgram?.clientId) ? 'Reply is required!' : 'Question is required!'}}</mat-error>
                         }
                     </mat-form-field>
 
                 </form>
             </div>
             <div class="modal-footer bg-dark">
-                <button type="button" mat-raised-button data-bs-dismiss="modal">Close</button>
-                <button type="button" mat-raised-button color="accent" data-bs-dismiss="modal" routerLink="/home"
-                    [disabled]="commentForm.invalid">Confirm</button>
+                <button type="button" mat-raised-button data-bs-dismiss="modal" (click)="commentForm.reset()">Close</button>
+                <button type="button" mat-raised-button color="accent" data-bs-dismiss="modal"
+                    [disabled]="commentForm.invalid" (click)="sendQuestion()">Confirm</button>
             </div>
         </div>
     </div>

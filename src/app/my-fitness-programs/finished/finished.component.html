@@ -1,1 +1,53 @@
-<p>finished works!</p>
+<div>
+    <div>
+        <p class="fs-4 fw-semibold mb-3">Fitness programs in progress</p>
+    </div>
+    <div class="custom-scrollbar">
+        <div class="container-fluid">
+            <div class="row gy-4 gx-4">
+                @for (program of programsFinished; track program.id) {
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+                        <div class="card border border-0 shadow">
+                            <img [src]="getImage(program.imageId)" class="img-card card-img-top img-fluid"
+                                alt="Image of program">
+                            <div class="card-body">
+                                <h5 class="card-title fs-4 mb-3">{{program.name}}</h5>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="fw-semibold fs-6 m-0"><img src="../../assets/price-tag.png"> {{program.price}} BAM</p>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-end">
+                                        <p class="fw-semibold fs-6 m-0"><img src="../../assets/location.png"> {{program.location}}</p>
+                                    </div>
+                                 </div>
+                                 <div class="row mt-3 d-flex align-items-center">
+                                    <div class="col-sm-6 col-md-6 col-xl-6 diff-badge">
+                                        @if (program.difficultyLevel === 'Beginner') {
+                                            <span class="badge bg-success fw-semibold fs-6 m-0">{{program.difficultyLevel}}</span>
+                                        }@else if(program.difficultyLevel === 'Intermediate'){
+                                            <span class="badge bg-warning fw-semibold fs-6 m-0">{{program.difficultyLevel}}</span>
+                                        }@else {
+                                            <span class="badge bg-danger fw-semibold fs-6 m-0">{{program.difficultyLevel}}</span>
+                                        }
+                                        
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-xl-6 view-btn">
+                                        <button mat-raised-button
+                                        class="bg-success text-white fs-6 d-flex align-items-center" routerLink="/fitness-programs/{{program.id}}"><img
+                                            src="../../../assets/details.png">&nbsp;See details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }@empty {
+                        <div class="d-flex align-items-center justify-content-center flex-column">
+                                <p class="fw-semibold fs-3">You do not have programs in progress currently!</p>
+                                <img src="../../../assets/empty.png">
+                        </div>
+                    }
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -42,8 +42,13 @@
 
   }
   @media screen and (min-width: 600px) {
+    .title{
+        display: flex;
+        justify-content: start;
+    }
     .add-btn{
-        text-align: end;
+        display: flex;
+        justify-content: end;
     }
     .view-btn{
       display: flex;
@@ -56,8 +61,13 @@
   }
 
   @media screen and (max-width: 600px) {
+    .title{
+      display: flex;
+      justify-content: center;
+  }
     .add-btn{
-        text-align: end;
+      display: flex;
+      justify-content: center;
     }
     .view-btn{
       display: flex;

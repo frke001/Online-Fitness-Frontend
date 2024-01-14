@@ -23,21 +23,22 @@ import { ClientService } from '../../services/client/client.service';
 })
 export class FitnessProgramComponent {
 
+
   commentForm: FormGroup;
   participateForm: FormGroup;
   id?: number;
   embedUrl: string = "https://www.youtube.com/embed/";
 
-  grade = new FormControl(null, [Validators.required, Validators.pattern('[1-5]{1}')]);
-  comment = new FormControl(null, [Validators.required]);
+  question = new FormControl(null, [Validators.required]);
   paymentType = new FormControl(null, [Validators.required]);
   cardNumber = new FormControl(null, []);
   mail = new FormControl(null, []);
   fitnessProgram: any;
   isParticipating: any;
-
+  defaultUserImage: any = '../../../assets/profileImage.png';
   ytUrl: any = '';
   programImageUrl: any = '../../../assets/defaultFitnes.jpg';
+  questions: Array<any> = [];
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private programsService: FitnessProgramService,
     private snackBarService: SnackBarService, private sanitizer: DomSanitizer, private imageService: ImageService, private authService: AuthService,
@@ -54,6 +55,8 @@ export class FitnessProgramComponent {
             if (image)
               this.programImageUrl = image;
             this.fitnessProgram = data;
+            this.questions = data.questions;
+            
           },
           error: (err) => {
             this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
@@ -61,29 +64,59 @@ export class FitnessProgramComponent {
         })
       }
     })
-    this.clientService.isParticipating(this.id).subscribe({
-      next: (data) => {
-        this.isParticipating = data;
-      },
-      error: (err) => {
-        this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
-      }
-    })
+    debugger
+    if (this.isLoggedIn()) {
+      this.clientService.isParticipating(this.id).subscribe({
+        next: (data) => {
+          this.isParticipating = data;
+        },
+        error: (err) => {
+          this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
+        }
+      })
+    }
     this.commentForm = formBuilder.group({
-      grade: this.grade,
-      comment: this.comment
+      question: this.question
     })
     this.participateForm = formBuilder.group({
       paymentType: this.paymentType
     })
   };
 
+  getId(){ 
+    return this.authService.getId();
+  }
   isLoggedIn() {
     return this.authService.isLoggedIn();
   }
   getBackUrl() {
+    //history.back();
+    //return this.isLoggedIn() ? '/my-fitness-programs' : '/fitness-programs';
+  }
 
-    return this.isLoggedIn() ? '/my-fitness-programs' : '/fitness-programs';
+  sendQuestion() {
+    if(this.fitnessProgram){
+      this.programsService.askQuestion(this.fitnessProgram?.id, {
+        clientSenderId: this.getId(),
+        question: this.question.value
+      }).subscribe({
+        next: (data)=>{
+          this.snackBarService.openSnackBar("Successfully send!","Close",true);
+          this.questions.push(data);
+          this.commentForm.reset();
+        },
+        error: (err)=>{
+          this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
+          this.commentForm.reset();
+        }
+      })
+    }
+    
+  }
+
+  getUserImage(id: any): string {
+    let image = this.imageService.downloadImage(id);
+    return image ? image : this.defaultUserImage;
   }
 
 

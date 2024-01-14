@@ -13,10 +13,14 @@ export class FitnessProgramService {
    }
 
    getFitnessProgram(id: any): Observable<any>{
-    return this.http.get(this.baseUrl + '/' + id);
+      return this.http.get(this.baseUrl + '/' + id);
    }
 
    getFitnessPrograms(request: any, page: any, size: any): Observable<any>{
       return this.http.post(this.baseUrl + `?page=${page}&size=${size}`, request);
+   }
+
+   askQuestion(id: any, request: any) : Observable<any>{
+    return this.http.post(this.baseUrl + '/' + id + '/question', request);
    }
 }

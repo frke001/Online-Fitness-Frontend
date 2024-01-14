@@ -1,127 +1,176 @@
-.img-card{
-    height: 300px;
-    object-fit: cover;
+.img-card {
+  height: 300px;
+  object-fit: cover;
 }
-.img-card:hover{
+
+.img-card:hover {
   filter: blur(2px);
 }
 
 .custom-scrollbar {
-    overflow-y: auto;
-    max-height: 48vh; /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
-    scrollbar-width: thin; /* Mozilla Firefox */
-    scrollbar-color: #4452a2 #f9faff; /* Mozilla Firefox */
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 8px; /* Širina custom scroll bara */
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #4452a2; /* Boja thumb-a (pokazivača) */
-    border-radius: 10px; /* Zaobljeni rubovi thumb-a */
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background-color: #f9faff; /* Boja pozadine trake */
-  }
+  overflow-y: auto;
+  max-height: 45vh;
+  /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
+  scrollbar-width: thin;
+  /* Mozilla Firefox */
+  scrollbar-color: #4452a2 #f9faff;
+  /* Mozilla Firefox */
+}
 
-  .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: white;
-    background-color: #8f7ceb;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  /* Širina custom scroll bara */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4452a2;
+  /* Boja thumb-a (pokazivača) */
+  border-radius: 10px;
+  /* Zaobljeni rubovi thumb-a */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #f9faff;
+  /* Boja pozadine trake */
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: white;
+  background-color: #8f7ceb;
 }
 
 .nav-pills .nav-link {
-	color: #4452a2;
-    border-radius: 10px;
-	font-size: 16px;
-	font-weight: 500;
+  color: #4452a2;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
 }
+
 .nav-pills:hover .nav-link:hover {
-	background-color: #8f7ceb;
-	color: white;
-    border-radius: 10px;
-	font-size: 16px;
-	font-weight: 500;
+  background-color: #8f7ceb;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
 }
-.name, .contact{
+
+.name,
+.contact {
   display: flex;
   justify-content: center;
 }
-.star{
+
+.star {
   color: red;
 }
-.card{
+
+.card {
   width: 90% !important;
 }
-.card-header{
+
+.card-header {
   background-image: linear-gradient(to right, #4452a2, #7067cf, #8f7ceb, #a895f5, #c3afff) !important;
   color: white;
 }
-.comment-body{
+
+.comment-body {
   background-color: #EEF5FF;
 }
-  @media screen and (min-width: 500px) {
-    .controls{
-      display: flex;
-      justify-content: end;
-    }
-    .title{
-      display: flex;
-      justify-content: start;
-    }
-    .difficulty{
-      display: flex;
-      justify-content: end;
-    }
-    .price{
-      display: flex;
-      justify-content: start;
-    }
-    .attr-btn{
-      display: flex;
-      justify-content: end;
-    }
+
+@media screen and (min-width: 500px) {
+  .question {
+    width: 70% !important;
+  }
+  .controls {
+    display: flex;
+    justify-content: end;
   }
 
-  @media screen and (max-width: 600px) {
-    .controls{
-      display: flex;
-      justify-content: center;
-    }
-    .title{
-      display: flex;
-      justify-content: center;
-    }
-    .tabs{
-      display: flex;
-      justify-content: center;
-    }
-    .instructor-price-diff{
-      display: flex;
-      justify-content: center;
-    }
-    .difficulty{
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-    }
-    .price{
-      
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-    }
-    .attr-btn{
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-    }
-    .dur{
-      display: flex;
-      justify-content: center;
-    }
-    .yt{
-      height: 200px;
-    }
+  .title {
+    display: flex;
+    justify-content: start;
   }
+
+  .difficulty {
+    display: flex;
+    justify-content: end;
+  }
+
+  .price {
+    display: flex;
+    justify-content: start;
+  }
+
+  .attr-btn {
+    display: flex;
+    justify-content: end;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .question {
+    width: 100% !important;
+  }
+  .controls {
+    display: flex;
+    justify-content: center;
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+  }
+
+  .instructor-price-diff {
+    display: flex;
+    justify-content: center;
+  }
+
+  .difficulty {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .price {
+
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .attr-btn {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dur {
+    display: flex;
+    justify-content: center;
+  }
+
+  .yt {
+    height: 200px;
+  }
+}
+
+
+.avatar {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
