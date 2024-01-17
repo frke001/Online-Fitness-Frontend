@@ -4,7 +4,7 @@
             <form [formGroup]="participateForm">
                 <label class="fw-semibold">Payment type<span class="star"> *</span></label>
                 <mat-form-field color="primary" class="w-100">
-                    <mat-label>Select difficulty level</mat-label>
+                    <mat-label>Select payment type</mat-label>
                     <mat-select matInput formControlName="paymentType" required (selectionChange)="onSelectionChange($event)">
                         <mat-option value="Card">Card</mat-option>
                         <mat-option value="PayPal">PayPal</mat-option>
@@ -12,7 +12,7 @@
                     </mat-select>
                     <img matSuffix src="../../../assets/difficulty.png" class="me-2">
                     @if (paymentType.invalid) {
-                    <mat-error>Difficulty level is required!</mat-error>
+                    <mat-error>Payment type is required!</mat-error>
                     }
                 </mat-form-field>
                 @if(paymentType.value === 'Card'){
@@ -31,7 +31,10 @@
                     <mat-label>Enter e-mail</mat-label>
                     <input matInput formControlName="mail" required>
                     <img matSuffix src="../../../assets/comments.png" class="me-2">
-                    @if (mail.invalid) {
+                    @if (mail.errors?.['email']) {
+                        <mat-error>E-mail not valid!</mat-error>
+                    }
+                    @if (mail.errors?.['required']) {
                     <mat-error>E-mail is required!</mat-error>
                     }
                 </mat-form-field>

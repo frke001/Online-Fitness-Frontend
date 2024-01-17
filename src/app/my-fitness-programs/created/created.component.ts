@@ -32,7 +32,7 @@ export class CreatedComponent {
 
   getImage(id: any): string {
     let image = this.imageService.downloadImage(id);
-    return image ? image : this.defaultImage;
+    return image? image : this.defaultImage;
   }
 
   onDelete(id: any) {

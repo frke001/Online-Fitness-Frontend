@@ -14,6 +14,7 @@ import { AddProgramComponent } from './my-fitness-programs/add-program/add-progr
 import { loginGuard } from './guards/login/login.guard';
 import { FitnessProgramComponent } from './fitnessProgram/fitness-program/fitness-program.component';
 import { ParticipateComponent } from './participate/participate.component';
+import { MessagesComponent } from './messages/messages.component';
 
 export const routes: Routes = [
 
@@ -74,10 +75,17 @@ export const routes: Routes = [
                 canActivate: [authGuard]
             },
             {
+                path: 'messages',
+                title: 'Messages',
+                component: MessagesComponent,
+                canActivate: [authGuard]
+            },
+            {
                 path: '',
                 redirectTo: 'home',
                 pathMatch: 'full'
             },
+
         ]
     },
     {

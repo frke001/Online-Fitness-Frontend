@@ -166,6 +166,7 @@ export class AddProgramComponent {
       this.link.removeValidators([Validators.required]);
       this.concreteLocation.addValidators([Validators.required]);
     }
-    
+    this.link.updateValueAndValidity()
+    this.concreteLocation.updateValueAndValidity();
   }
 }

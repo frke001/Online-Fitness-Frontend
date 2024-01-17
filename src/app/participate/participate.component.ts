@@ -45,13 +45,16 @@ export class ParticipateComponent {
     if(event.value === 'Card'){
       this.cardNumber.addValidators([Validators.required]);
       this.mail.clearValidators();
-    }else if(event.value === 'Paypal'){
+    }else if(event.value === 'PayPal'){
       this.cardNumber.clearValidators();
-      this.mail.addValidators([Validators.required]);
+      this.mail.addValidators([Validators.required, Validators.email]);
     }else{
       this.cardNumber.clearValidators();
       this.mail.clearValidators();
     }
+
+    this.cardNumber.updateValueAndValidity();
+    this.mail.updateValueAndValidity();
   }
   onParticipate() {
     this.clientService.participateInProgram(this.id).subscribe({

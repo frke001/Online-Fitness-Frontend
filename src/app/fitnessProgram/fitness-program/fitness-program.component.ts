@@ -43,7 +43,7 @@ export class FitnessProgramComponent {
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private programsService: FitnessProgramService,
     private snackBarService: SnackBarService, private sanitizer: DomSanitizer, private imageService: ImageService, private authService: AuthService,
     private clientService: ClientService) {
-
+     
     this.route.params.subscribe(params => {
       this.id = params['id'];
       if (this.id) {
@@ -56,7 +56,16 @@ export class FitnessProgramComponent {
               this.programImageUrl = image;
             this.fitnessProgram = data;
             this.questions = data.questions;
-            
+            if (this.isLoggedIn()) {
+              this.clientService.isParticipating(this.id).subscribe({
+                next: (data) => {
+                  this.isParticipating = data;
+                },
+                error: (err) => {
+                  this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
+                }
+              })
+            }
           },
           error: (err) => {
             this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
@@ -64,17 +73,7 @@ export class FitnessProgramComponent {
         })
       }
     })
-    debugger
-    if (this.isLoggedIn()) {
-      this.clientService.isParticipating(this.id).subscribe({
-        next: (data) => {
-          this.isParticipating = data;
-        },
-        error: (err) => {
-          this.snackBarService.openSnackBar("Error during communication with server!", "Close", false);
-        }
-      })
-    }
+    
     this.commentForm = formBuilder.group({
       question: this.question
     })

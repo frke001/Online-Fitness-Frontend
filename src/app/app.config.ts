@@ -5,10 +5,10 @@ import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { jwtTokenInterceptorInterceptor } from './interceptors/jwt-token-interceptor.interceptor';
 import { GlobalErrorHandler } from '../global-error-handler';
-import { IMAGE_CONFIG } from '@angular/common';
+import { DatePipe, IMAGE_CONFIG } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations(), 
+  providers: [provideRouter(routes), provideAnimations(),
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandler,

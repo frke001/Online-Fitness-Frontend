@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class ClientService {
 
   private baseUrl: string = "http://localhost:9000/api/v1/clients/";
+  private baseUrlCopy: string = "http://localhost:9000/api/v1/clients";
   private updatePictureUrl: string = "http://localhost:9000/api/v1/clients/";
   constructor(private http: HttpClient, private baseService: BaseService, private authService: AuthService) {
 
@@ -62,5 +63,17 @@ export class ClientService {
   }
   getAllFitnessProgramsFinished(): Observable<any> {
     return this.http.get(this.baseUrl + this.authService.getId() + '/fitness-programs/finished');
+  }
+  getAllClients():Observable<any>{
+    return this.http.get(this.baseUrlCopy);
+  }
+  getAllMessages():Observable<any>{
+    return this.http.get(this.baseUrl + this.authService.getId() + '/messages');
+  }
+  insertMessage(request: any):Observable<any>{
+    return this.http.post(this.baseUrl + this.authService.getId() + '/messages',request);
+  }
+  updateMessage(messageId:any):Observable<any>{
+    return this.http.put(this.baseUrl + this.authService.getId() + '/messages/' + messageId,{});
   }
 }
