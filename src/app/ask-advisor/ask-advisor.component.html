@@ -1,0 +1,73 @@
+<div class="container-fluid p-5">
+    <div class="header mb-4">
+        <span class="badge bg-success fs-3 fw-semibold">Categories</span>
+    </div>
+    <div class="container">
+
+        <div class="custom-scrollbar mt-3">
+            @for (p of programs; track p.id) {
+            <div class="card mb-5 borde border-0 shadow">
+                <div class="card-header rounded-bottom">
+                    <p class="m-0 fs-3 fw-semibold">{{p.name}}</p>
+                    <button mat-raised-button color="accent d-flex" (click)="onAsk(p.id)" data-bs-toggle="modal"
+                    data-bs-target="#askAdvisor"><img src="../../assets/readMessage.png" >
+                        Ask advisors</button>
+                </div>
+                <div class="card-body rounded-bottom">
+                    <div class="body">
+                        <div class="fs-5 fw-semibold m-0 p-0 d-flex align-items-center gap-1 price"><img
+                                src="../../../assets/price-tag.png"> {{p?.price}} BAM</div>
+                        <div class="fs-5 fw-semibold m-0 p-0 d-flex align-items-center gap-1 diff"><img
+                                src="../../../assets/difficulty.png">
+                            @if(p?.difficultyLevel === 'Beginner'){
+                            <span class="badge bg-success fs-5">{{p?.difficultyLevel}}</span>
+                            }@else if(p?.difficultyLevel === 'Intermediate'){
+                            <span class="badge bg-warning fs-5">{{p?.difficultyLevel}}</span>
+                            }@else{
+                            <span class="badge bg-danger fs-5">{{p?.difficultyLevel}}</span>
+                            }
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade " id="askAdvisor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog text-white modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header bg-dark">
+                <div class="d-flex justify-content-center align-items-center w-100 gap-2">
+                    <img src="../../../assets/readMessage.png">
+                    <span class="fs-5">Ask question</span>
+                </div>
+                <mat-icon data-bs-dismiss="modal" class="pointer">close</mat-icon>
+            </div>
+            <div class="modal-body p-5">
+                <form [formGroup]="questionForm">
+                    <label class="fw-semibold">Question<span class="star"> *</span></label>
+                    <mat-form-field color="primary" class="w-100">
+                        <mat-label>Enter quesion</mat-label>
+                        <input matInput formControlName="question" required>
+                        <img matSuffix src="../../../assets/comments.png" class="me-2">
+                        @if (question.invalid) {
+                        <mat-error>Question is required!</mat-error>
+                        }
+                    </mat-form-field>
+
+                </form>
+            </div>
+            <div class="modal-footer bg-dark">
+                <button type="button" mat-raised-button data-bs-dismiss="modal" (click)="questionForm.reset()">Close</button>
+                <button type="button" mat-raised-button color="accent" data-bs-dismiss="modal"
+                    [disabled]="question.invalid" (click)="sendQuestion()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class FitnessProgramService {
 
   baseUrl: string = 'http://localhost:9000/api/v1/fitness-programs';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService:AuthService) {
 
    }
 
@@ -22,5 +23,11 @@ export class FitnessProgramService {
 
    askQuestion(id: any, request: any) : Observable<any>{
     return this.http.post(this.baseUrl + '/' + id + '/question', request);
+   }
+
+   getAll():Observable<any>{
+      return this.http.post(this.baseUrl + '/info', {
+         id: this.authService.getId()
+      });
    }
 }

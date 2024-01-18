@@ -15,6 +15,8 @@ import { loginGuard } from './guards/login/login.guard';
 import { FitnessProgramComponent } from './fitnessProgram/fitness-program/fitness-program.component';
 import { ParticipateComponent } from './participate/participate.component';
 import { MessagesComponent } from './messages/messages.component';
+import { CategorySubscribeComponent } from './category-subscribe/category-subscribe.component';
+import { AskAdvisorComponent } from './ask-advisor/ask-advisor.component';
 
 export const routes: Routes = [
 
@@ -78,6 +80,18 @@ export const routes: Routes = [
                 path: 'messages',
                 title: 'Messages',
                 component: MessagesComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'subscribe',
+                title: 'Subscribe',
+                component: CategorySubscribeComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'help',
+                title: 'Help',
+                component: AskAdvisorComponent,
                 canActivate: [authGuard]
             },
             {

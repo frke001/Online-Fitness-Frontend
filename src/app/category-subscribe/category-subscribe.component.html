@@ -1,0 +1,22 @@
+<div class="container-fluid p-5">
+    <div class="header mb-4">
+        <span class="badge bg-success fs-3 fw-semibold">Categories</span>
+    </div>
+    <div class="container">
+
+        <div class="custom-scrollbar mt-3">
+            @for (c of categories; track c.id) {
+            <div class="card mb-5 borde border-0 shadow">
+                <div class="card-header rounded-bottom">
+                    <p class="m-0 fs-3 fw-semibold">{{c.name}}</p>
+                    <button mat-raised-button color="accent d-flex" (click)="isSubscribed(c.id)?  onUnsubscribe(c.id) : onSubscribe(c.id)"><img src="../../../assets/subscribe.png">
+                       {{isSubscribed(c.id)? "Unsubscribe" : "Subscribe"}}</button>
+                </div>
+                <!-- <div class="card-body rounded-bottom">
+
+                </div> -->
+            </div>
+            }
+        </div>
+    </div>
+</div>

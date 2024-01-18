@@ -76,4 +76,16 @@ export class ClientService {
   updateMessage(messageId:any):Observable<any>{
     return this.http.put(this.baseUrl + this.authService.getId() + '/messages/' + messageId,{});
   }
+  subscribeForCategory(categoryId: any){
+    return this.http.post(this.baseUrl + this.authService.getId() + '/subscribe/' + categoryId,{});
+  }
+  unsubscribeForCategory(categoryId: any){
+    return this.http.delete(this.baseUrl + this.authService.getId() + '/unsubscribe/' + categoryId);
+  }
+  isSubscribed(categoryId: any){
+    return this.http.get(this.baseUrl + this.authService.getId() + '/subscribe/' + categoryId);
+  }
+  askAdvisor(request: any):Observable<any>{
+    return this.http.post(this.baseUrl + this.authService.getId() + '/ask-advisor',request);
+  }
 }
