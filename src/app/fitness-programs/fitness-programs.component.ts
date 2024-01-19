@@ -126,7 +126,11 @@ export class FitnessProgramsComponent {
   }
 
   getImage(id: any): string {
-    let image = this.imageService.downloadImage(id);
-    return image ? image : this.defaultImage;
+    if(id){
+      let image = this.imageService.downloadImage(id);
+      return image
+    }else{
+      return this.defaultImage;
+    }
   }
 }

@@ -31,7 +31,7 @@ export class NavbarComponent {
           next: (res) => {
             if (res) {
               let image = this.imageService.downloadImage(res);
-              this.profileImage = image ? image : this.defaultImageUrl;
+              this.profileImage = image;
             }
           },
           error: (err) => {

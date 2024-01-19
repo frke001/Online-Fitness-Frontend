@@ -81,8 +81,12 @@ export class MessagesComponent {
     this.form.reset();
   }
   getUserImage(id: any): string {
-    let image = this.imageService.downloadImage(id);
-    return image ? image : this.defaultUserImage;
+    if(id){
+      let image = this.imageService.downloadImage(id);
+      return image
+    }else{
+      return this.defaultUserImage;
+    }
   }
   onCollapse(mess: any) {
     if(!mess.isRead && this.authService.getId() != mess.clientSenderId){

@@ -1,0 +1,64 @@
+.custom-scrollbar  {
+    overflow-y: auto;
+    max-height: 35vh;
+    /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
+    min-height: 15vh;
+    scrollbar-width: thin;
+    /* Mozilla Firefox */
+    scrollbar-color: #4452a2 #f9faff;
+    /* Mozilla Firefox */
+}
+.custom-scrollbar1{
+    overflow-y: auto;
+    max-height: 60vh;
+    /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
+    scrollbar-width: thin;
+    /* Mozilla Firefox */
+    scrollbar-color: #4452a2 #f9faff;
+}
+
+
+.custom-scrollbar::-webkit-scrollbar, .custom-scrollbar1::-webkit-scrollbar {
+    width: 8px;
+    /* Širina custom scroll bara */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb, .custom-scrollbar1::-webkit-scrollbar-thumb {
+    background-color: #4452a2;
+    /* Boja thumb-a (pokazivača) */
+    border-radius: 10px;
+    /* Zaobljeni rubovi thumb-a */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track, .custom-scrollbar1::-webkit-scrollbar-track {
+    background-color: #f9faff;
+    /* Boja pozadine trake */
+}
+
+.list-group-item.active {
+    background-image: linear-gradient(to right, #4452a2, #7067cf, #8f7ceb, #a895f5, #c3afff) !important;
+    color: white;
+    border: 0;
+}
+
+.card-body {
+    background-color: #EEF5FF;
+}
+.star{
+    color: red;
+}
+.forma{
+    width: 100%;
+}
+.del-btn{
+    background-color: transparent;
+    border: 0;
+}
+@media screen and (max-width: 800px) {
+    .exercise{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}

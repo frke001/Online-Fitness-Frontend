@@ -1,1 +1,91 @@
-<p>activity-diary works!</p>
+<div class="container-fluid p-5">
+
+    <div class="header mb-4">
+        <span class="badge bg-success fs-3 fw-semibold">Workout history</span>
+    </div>
+    <div class="custom-scrollbar1 mt-3">
+        <div class="container">
+
+            <div class="card shadow border border-0">
+
+                <div class="card-body">
+
+                    <ul class="list-group list-group-flush">
+                        <div class="custom-scrollbar mt-3">
+                            <li class="list-group-item active rounded d-flex justify-content-center fs-5 fw-semibold">
+                                Exercises</li>
+                            @for (e of exercises; track e.id) {
+                            <li class="list-group-item rounded mt-1">
+                                <div class="d-flex justify-content-between align-items-center exercise">
+                                    <div class="d-flex align-items-center gap-2 exercise">
+                                        <p class="m-0 fw-semibold fs-6">{{e.exercise}}</p>
+                                        <span class="badge bg-success fw-semibold">Weight[kg]: {{e.weight}}</span>
+                                        <span class="badge bg-success fw-semibold">Sets: {{e.sets}}</span>
+                                        <span class="badge bg-success fw-semibold">Reps: {{e.reps}}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 mt-2 exercise">
+                                        <p class="m-0 fw-semibold fs-6">{{e.date}}</p>
+                                        <button class="del-btn" matTooltip="Delete" (click)="onDelete(e.id)"><img
+                                                src="../../assets/delete.png"></button>
+                                    </div>
+                                </div>
+                            </li>
+                            }@empty {
+                            <div class="d-flex align-items-center justify-content-center flex-column mt-3">
+                                <p class="fw-semibold fs-5">You do not have exercises currently!</p>
+                                <img src="../../assets/no-exercise.png">
+                            </div>
+                            }
+                            <div class="d-flex justify-content-center align-items-center mt-3">
+                                <button mat-raised-button class="bg-success text-white fs-6" routerLink="/add-exercise">
+                                    <img src="../../assets/addExercise.png">&nbsp;Add exercise</button>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="addExercise" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog text-white modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header bg-dark">
+                <div class="d-flex justify-content-center align-items-center w-100 gap-2">
+                    <img src="../../assets/addExercise.png">
+                    <span class="fs-5">Add new exercise</span>
+                </div>
+                <mat-icon data-bs-dismiss="modal" class="pointer">close</mat-icon>
+            </div>
+            <div class="modal-body fs-5">
+                <form [formGroup]="addForm">
+                    <label class="fw-semibold">Exercise<span class="star"> *</span></label>
+                    <mat-form-field color="primary" class="w-100">
+                        <mat-label>Enter exercise name</mat-label>
+                        <input matInput formControlName="exercise" required>
+                        <img matSuffix src="../../../assets/categoryName.png" class="me-2">
+                        @if (exercise.invalid) {
+                        <mat-error>Exercise is required!</mat-error>
+                        }
+                    </mat-form-field>
+                    <label class="fw-semibold">Date<span class="star"> *</span></label>
+                    <mat-form-field color="primary" class="w-100">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="date" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        @if (date.invalid) {
+                        <mat-error>Date is required!</mat-error>
+                        }
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="modal-footer bg-dark">
+                <button type="button" mat-raised-button data-bs-dismiss="modal">Close</button>
+                <button type="button" mat-raised-button color="accent" data-bs-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

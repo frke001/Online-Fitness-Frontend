@@ -76,7 +76,7 @@ export class ProfileComponent {
       next: (res) => {
         if (res) {
           let image = this.imageService.downloadImage(res);
-          this.profileImage = image ? image : this.defaultImageUrl;
+          this.profileImage = image;
         }
       },
       error: (err) => {
@@ -122,7 +122,7 @@ export class ProfileComponent {
       if (file) {
         this.imageService.uploadImage(file).subscribe((res) => {
           let image = this.imageService.downloadImage(res);
-          this.profileImage = image ? image : this.defaultImageUrl;
+          this.profileImage = image;
 
           this.clientService.updateProfileImage(res).subscribe((res) => {
             if (!res) {

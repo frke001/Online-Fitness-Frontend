@@ -88,4 +88,13 @@ export class ClientService {
   askAdvisor(request: any):Observable<any>{
     return this.http.post(this.baseUrl + this.authService.getId() + '/ask-advisor',request);
   }
+  getAllExercises():Observable<any>{
+    return this.http.get(this.baseUrl + this.authService.getId() + '/exercises');
+  }
+  insertExercise(request :any):Observable<any>{
+    return this.http.post(this.baseUrl + this.authService.getId() + '/exercises', request);
+  }
+  deleteExercise(exerciseId :any){
+    return this.http.delete(this.baseUrl + this.authService.getId() + '/exercises/' + exerciseId);
+  }
 }

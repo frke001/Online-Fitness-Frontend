@@ -17,6 +17,7 @@ import { ParticipateComponent } from './participate/participate.component';
 import { MessagesComponent } from './messages/messages.component';
 import { CategorySubscribeComponent } from './category-subscribe/category-subscribe.component';
 import { AskAdvisorComponent } from './ask-advisor/ask-advisor.component';
+import { AddExerciseComponent } from './add-exercise/add-exercise.component';
 
 export const routes: Routes = [
 
@@ -62,6 +63,12 @@ export const routes: Routes = [
                 path: 'diary',
                 title: 'Diary',
                 component: ActivityDiaryComponent,
+                canActivate: [authGuard]
+            },
+            {
+                path: 'add-exercise',
+                title: 'Add Exercise',
+                component: AddExerciseComponent,
                 canActivate: [authGuard]
             },
             {

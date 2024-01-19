@@ -7,6 +7,7 @@ import { jwtTokenInterceptorInterceptor } from './interceptors/jwt-token-interce
 import { GlobalErrorHandler } from '../global-error-handler';
 import { DatePipe, IMAGE_CONFIG } from '@angular/common';
 
+
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimations(),
     {
