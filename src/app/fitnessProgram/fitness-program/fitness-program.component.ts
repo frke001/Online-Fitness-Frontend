@@ -39,6 +39,8 @@ export class FitnessProgramComponent {
   ytUrl: any = '';
   programImageUrl: any = '../../../assets/defaultFitnes.jpg';
   questions: Array<any> = [];
+  questionForm: FormGroup;
+  advisorQuestion = new FormControl(null, [Validators.required]);
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private programsService: FitnessProgramService,
     private snackBarService: SnackBarService, private sanitizer: DomSanitizer, private imageService: ImageService, private authService: AuthService,
@@ -79,9 +81,30 @@ export class FitnessProgramComponent {
     })
     this.participateForm = formBuilder.group({
       paymentType: this.paymentType
+    });
+    this.questionForm = formBuilder.group({
+      advisorQuestion: this.advisorQuestion
     })
   };
 
+  sendQuestionAdvisor() {
+    
+    if (this.id != null) {
+      this.clientService.askAdvisor({
+        question: this.advisorQuestion.value,
+        fitnessProgramId: this.id
+      }).subscribe({
+        next: (data) => {
+          this.snackBarService.openSnackBar("Question successfully sent!", "Close", true);
+          this.questionForm.reset();
+        },
+        error: (err) => {
+          this.snackBarService.openSnackBar("Question unsuccessfully sent!", "Close", false);
+          this.questionForm.reset();
+        }
+      });
+    }
+  }
   getId(){ 
     return this.authService.getId();
   }

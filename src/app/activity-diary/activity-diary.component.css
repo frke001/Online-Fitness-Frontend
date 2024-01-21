@@ -10,7 +10,7 @@
 }
 .custom-scrollbar1{
     overflow-y: auto;
-    max-height: 60vh;
+    max-height: 65vh;
     /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
     scrollbar-width: thin;
     /* Mozilla Firefox */
@@ -60,5 +60,12 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+    }
+    .filter{
+        justify-content: center;
+        flex-direction: column;
+    }
+    .add-ent-btn{
+        margin-bottom: 10px;
     }
 }

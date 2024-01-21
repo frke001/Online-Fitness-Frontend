@@ -6,9 +6,9 @@
     <div class="custom-scrollbar1 mt-3">
         <div class="container">
 
-            <div class="card shadow border border-0">
+            <div class="card shadow border border-0 rounded">
 
-                <div class="card-body">
+                <div class="card-body rounded">
 
                     <ul class="list-group list-group-flush">
                         <div class="custom-scrollbar mt-3">
@@ -44,30 +44,102 @@
                     </ul>
                 </div>
             </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button mat-raised-button class="bg-success text-white fs-6 add-ent-btn d-flex align-items-center" (click)="onShowProgress()" data-bs-toggle="collapse"
+                href="#showProgress" role="button" aria-expanded="false" aria-controls="collapseExample"><img src="../../assets/progress.png">&nbsp;Show weight progress</button>
+            </div>
+            <div class="collapse" id="showProgress">
+            <div class="mt-1 d-flex align-items-center justify-content-between filter">
+                <div class="d-flex gap-2"> 
+                    <button mat-raised-button class="bg-success text-white fs-6 add-ent-btn d-flex align-items-center" data-bs-toggle="collapse"
+                    href="#collapseEntry" role="button" aria-expanded="false" aria-controls="collapseExample"><img src="../../assets/add.png">&nbsp;Add new
+                    entry</button>
+                    <button mat-raised-button class="bg-info text-white fs-6 add-ent-btn d-flex align-items-center" (click)="onDownloadPf()"><img src="../../assets/pdf.png">&nbsp;Download pdf</button>
+                </div>
+                <mat-form-field class="example-form-field">
+                    <mat-label>Filter progress</mat-label>
+                    <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker">
+                        <input matStartDate placeholder="Start date" formControlName="start">
+                        <input matEndDate placeholder="End date" formControlName="end">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #campaignOnePicker (closed)="onSelect()"></mat-date-range-picker>
+                </mat-form-field>
+            </div>
+            <div class="collapse" id="collapseEntry">
+                <div class="card rounded shadow border border-0 mb-3">
+                    <div class="card-body rounded">
+                        <form [formGroup]="addEntryForm">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <label class="fw-semibold">Weight[kg]<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Enter your weight</mat-label>
+                                        <input matInput formControlName="myWeight" type="number" min="20" max="500"
+                                            required>
+                                        <img matSuffix src="../../../assets/categoryName.png" class="me-2">
+                                        @if (myWeight.errors?.['required']) {
+                                        <mat-error>Weight is required!</mat-error>
+                                        }
+                                        @if(myWeight.errors?.['min'] || myWeight.errors?.['max']){
+                                        <mat-error>Weight must be between 20 and 500 kg!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label class="fw-semibold">Date<span class="star"> *</span></label>
+                                    <mat-form-field color="primary" class="w-100">
+                                        <mat-label>Choose a date</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="myDate" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        @if (myDate.invalid) {
+                                        <mat-error>Date is required!</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <button mat-raised-button class="bg-success text-white fs-6" (click)="onAddEntry()" data-bs-toggle="collapse"
+                                        href="#collapseEntry" role="button" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-1 card shadow border border-0 rounded">
+                <div class="card-body rounded">
+                    <app-area-chart [xAxis]="xAxis" [yAxis]="yAxis"></app-area-chart>
+                </div>
+            </div>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade " id="addExercise" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!-- <div class="modal fade " id="addWeight" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog text-white modal-dialog-centered">
         <div class="modal-content bg-dark">
             <div class="modal-header bg-dark">
                 <div class="d-flex justify-content-center align-items-center w-100 gap-2">
                     <img src="../../assets/addExercise.png">
-                    <span class="fs-5">Add new exercise</span>
+                    <span class="fs-5">Add new progress info</span>
                 </div>
                 <mat-icon data-bs-dismiss="modal" class="pointer">close</mat-icon>
             </div>
             <div class="modal-body fs-5">
                 <form [formGroup]="addForm">
-                    <label class="fw-semibold">Exercise<span class="star"> *</span></label>
+                    <label class="fw-semibold">Weight<span class="star"> *</span></label>
                     <mat-form-field color="primary" class="w-100">
-                        <mat-label>Enter exercise name</mat-label>
-                        <input matInput formControlName="exercise" required>
+                        <mat-label>Enter your weight</mat-label>
+                        <input matInput formControlName="exercise" type="number" min="20" max="500" required>
                         <img matSuffix src="../../../assets/categoryName.png" class="me-2">
                         @if (exercise.invalid) {
-                        <mat-error>Exercise is required!</mat-error>
+                        <mat-error>Weight is required!</mat-error>
                         }
                     </mat-form-field>
                     <label class="fw-semibold">Date<span class="star"> *</span></label>
@@ -88,4 +160,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

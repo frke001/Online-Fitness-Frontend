@@ -48,7 +48,7 @@
                     <div class="avatar">
                         <img [src]="getUserImage(mess.clientSenderProfileImageId)" matTooltip="Profile" alt="slika" class="profile rounde-pill">
                     </div>
-                    <p class="fw-semibold fs-6 m-0">&nbsp;{{getId() != mess.clientSenderId? mess.clientSenderUsername : "You"}}&nbsp;</p><span class="fw-semibold text-dark">{{getId() != mess.clientSenderId && !mess.isRead? "(*Nova poruka)" : ""}}</span>
+                    <p class="fw-semibold fs-6 m-0">&nbsp;{{getId() != mess.clientSenderId? mess.clientSenderUsername : "You"}}<span class="text-danger">{{getId() != mess.clientSenderId? "" : " (to " + mess.clientReceiverUsername + ")"}}</span>&nbsp;</p><span class="fw-semibold text-danger">{{getId() != mess.clientSenderId && !mess.isRead? "(*Nova poruka)" : ""}}</span>
                     </div>
                 <div>
                     <p class="fw-semibold fs-6 m-0">{{mess.creationDate}}</p>

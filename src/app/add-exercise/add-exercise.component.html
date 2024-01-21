@@ -37,8 +37,11 @@
                             <mat-label>Enter weight</mat-label>
                             <input matInput formControlName="weight" type="number" min="0" max="500" required>
                             <img matSuffix src="../../../assets/weight.png" class="me-2">
-                            @if (weight.invalid) {
+                            @if (weight.errors?.['required']) {
                             <mat-error>Weight is required!</mat-error>
+                            }
+                            @if(weight.errors?.['min'] || weight.errors?.['max']){
+                                <mat-error>Weight must be between 0 and 500 kg!</mat-error>
                             }
                         </mat-form-field>
                     </div>

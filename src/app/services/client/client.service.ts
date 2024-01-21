@@ -97,4 +97,10 @@ export class ClientService {
   deleteExercise(exerciseId :any){
     return this.http.delete(this.baseUrl + this.authService.getId() + '/exercises/' + exerciseId);
   }
+  insertProgressEntry(request: any): Observable<any>{
+    return this.http.post(this.baseUrl + this.authService.getId() + '/progress', request);
+  }
+  getProgressChartValues(request: any):Observable<any>{
+    return this.http.post(this.baseUrl + this.authService.getId() + '/progress/filter', request);
+  }
 }

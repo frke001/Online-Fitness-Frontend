@@ -6,20 +6,30 @@
         <img src="{{programImageUrl}}" class="img-card card-img-top img-fluid" alt="Image of program">
         <div class="custom-scrollbar">
             <div class="card-body">
-                <div class="row d-flex align-items-center">
-                    <div class="col-sm-6 col-md-6 col-xl-6 title">
-                        <p class="fs-3 fw-semibold m-0 p-0">{{fitnessProgram?.name}}</p>
-                    </div>
+                <div class="d-flex align-items-center justify-content-between head">
+
+                    <p class="fs-3 fw-semibold m-0 p-0">{{fitnessProgram?.name}}</p>
+
                     @if(isLoggedIn()){
-                    <div class="col-sm-6 col-md-6 col-xl-6 controls">
+                    <div class="d-flex gap-2 actions">
+
                         <div class="d-flex align-items-center gap-2">
                             @if(!isParticipating){
-                            <button mat-raised-button color="primary d-flex fs-6" routerLink="/participate/{{fitnessProgram?.id}}"><img src="../../../assets/participate.png">
+                            <button mat-raised-button color="primary d-flex fs-6"
+                                routerLink="/participate/{{fitnessProgram?.id}}"><img
+                                    src="../../../assets/participate.png">
                                 Participate</button>
                             }
+
                             <!-- <button mat-raised-button color="accent d-flex"><img src="../../../assets/subscribe.png">
                                 Subscribe</button> -->
                         </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <button mat-raised-button color="accent d-flex" data-bs-toggle="modal"
+                                data-bs-target="#askAdvisor"><img src="../../../assets/help.png">
+                                Ask advisors</button>
+                        </div>
+
                     </div>
                     }
                 </div>
@@ -173,32 +183,36 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <p class="fw-semibold fs-4 m-0">Questions: </p>
                             @if (isLoggedIn()) {
-                            <button mat-raised-button class="bg-success text-white fs-6 d-flex align-items-center" data-bs-toggle="modal"
-                                data-bs-target="#addComment"><img src="../../../assets/question-mark.png">{{(getId() == fitnessProgram?.clientId) ? 'Reply' : 'Ask Question'}}</button>
+                            <button mat-raised-button class="bg-success text-white fs-6 d-flex align-items-center"
+                                data-bs-toggle="modal" data-bs-target="#addComment"><img
+                                    src="../../../assets/question-mark.png">{{(getId() == fitnessProgram?.clientId) ?
+                                'Reply' : 'Ask Question'}}</button>
                             }
                         </div>
-          
+
                         <div class="d-flex justify-content-center flex-wrap">
                             @for (q of questions; track q.id) {
                             <div class="card border border-0 shadow mb-3 question">
                                 <div class="card-header d-flex align-items-center">
                                     <div class="avatar">
-                                        <img [src]="getUserImage(q.clientSenderProfileImageId)" matTooltip="Profile" alt="slika" class="profile rounde-pill">
-                                      </div>
-                                    <p class="fw-semibold fs-6 m-0">&nbsp;{{q.clientSenderUsername}}{{q.clientSenderId == fitnessProgram?.clientId? ' (Owner)' : ''}}</p>
-                                  
+                                        <img [src]="getUserImage(q.clientSenderProfileImageId)" matTooltip="Profile"
+                                            alt="slika" class="profile rounde-pill">
+                                    </div>
+                                    <p class="fw-semibold fs-6 m-0">&nbsp;{{q.clientSenderUsername}}{{q.clientSenderId
+                                        == fitnessProgram?.clientId? ' (Owner)' : ''}}</p>
+
                                 </div>
                                 <div class="card-body comment-body">
                                     <p class="fw-semibold fs-6 m-0 text-secondary">{{q.question}}</p>
                                 </div>
                             </div>
-                        }@empty {
+                            }@empty {
                             <div class="d-flex align-items-center flex-column">
-                            <p class="fs-4 fw-semibold">Trenutno nema pitanja</p>
-                            <img src="../../../assets/noQuestions.png">
+                                <p class="fs-4 fw-semibold">Trenutno nema pitanja</p>
+                                <img src="../../../assets/noQuestions.png">
                             </div>
-                        }
-                    </div>
+                            }
+                        </div>
                     </div>
 
                 </div>
@@ -222,7 +236,8 @@
             </div>
             <div class="modal-body p-5">
                 <form [formGroup]="commentForm">
-                    <label class="fw-semibold">{{(getId() == fitnessProgram?.clientId) ? 'Reply' : 'Question'}}<span class="star"> *</span></label>
+                    <label class="fw-semibold">{{(getId() == fitnessProgram?.clientId) ? 'Reply' : 'Question'}}<span
+                            class="star"> *</span></label>
                     <mat-form-field color="primary" class="w-100">
                         <mat-label>{{(getId() == fitnessProgram?.clientId) ? 'Enter reply' : 'Enter question'}}</mat-label>
                         <textarea matInput formControlName="question" required></textarea>
@@ -235,9 +250,46 @@
                 </form>
             </div>
             <div class="modal-footer bg-dark">
-                <button type="button" mat-raised-button data-bs-dismiss="modal" (click)="commentForm.reset()">Close</button>
+                <button type="button" mat-raised-button data-bs-dismiss="modal"
+                    (click)="commentForm.reset()">Close</button>
                 <button type="button" mat-raised-button color="accent" data-bs-dismiss="modal"
                     [disabled]="commentForm.invalid" (click)="sendQuestion()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade " id="askAdvisor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog text-white modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header bg-dark">
+                <div class="d-flex justify-content-center align-items-center w-100 gap-2">
+                    <img src="../../../assets/readMessage.png">
+                    <span class="fs-5">Ask question</span>
+                </div>
+                <mat-icon data-bs-dismiss="modal" class="pointer">close</mat-icon>
+            </div>
+            <div class="modal-body p-5">
+                <form [formGroup]="questionForm">
+                    <label class="fw-semibold">Question<span class="star"> *</span></label>
+                    <mat-form-field color="primary" class="w-100">
+                        <mat-label>Enter quesion</mat-label>
+                        <input matInput formControlName="advisorQuestion" required>
+                        <img matSuffix src="../../../assets/comments.png" class="me-2">
+                        @if (advisorQuestion.invalid) {
+                        <mat-error>Question is required!</mat-error>
+                        }
+                    </mat-form-field>
+
+                </form>
+            </div>
+            <div class="modal-footer bg-dark">
+                <button type="button" mat-raised-button data-bs-dismiss="modal"
+                    (click)="questionForm.reset()">Close</button>
+                <button type="button" mat-raised-button color="accent" data-bs-dismiss="modal"
+                    [disabled]="questionForm.invalid" (click)="sendQuestionAdvisor()">Confirm</button>
             </div>
         </div>
     </div>
