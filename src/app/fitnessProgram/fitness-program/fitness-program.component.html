@@ -276,7 +276,7 @@
                     <label class="fw-semibold">Question<span class="star"> *</span></label>
                     <mat-form-field color="primary" class="w-100">
                         <mat-label>Enter quesion</mat-label>
-                        <input matInput formControlName="advisorQuestion" required>
+                        <textarea matInput formControlName="advisorQuestion" required></textarea>
                         <img matSuffix src="../../../assets/comments.png" class="me-2">
                         @if (advisorQuestion.invalid) {
                         <mat-error>Question is required!</mat-error>

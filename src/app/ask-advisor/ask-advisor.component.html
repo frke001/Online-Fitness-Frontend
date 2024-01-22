@@ -2,9 +2,10 @@
     <div class="header mb-4">
         <span class="badge bg-success fs-3 fw-semibold">Categories</span>
     </div>
+    <div class="custom-scrollbar mt-3">
     <div class="container">
 
-        <div class="custom-scrollbar mt-3">
+        
             @for (p of programs; track p.id) {
             <div class="card mb-5 borde border-0 shadow">
                 <div class="card-header rounded-bottom">
@@ -54,7 +55,7 @@
                     <label class="fw-semibold">Question<span class="star"> *</span></label>
                     <mat-form-field color="primary" class="w-100">
                         <mat-label>Enter quesion</mat-label>
-                        <input matInput formControlName="question" required>
+                        <textarea matInput formControlName="question" required></textarea>
                         <img matSuffix src="../../../assets/comments.png" class="me-2">
                         @if (question.invalid) {
                         <mat-error>Question is required!</mat-error>

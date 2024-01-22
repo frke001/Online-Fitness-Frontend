@@ -2,9 +2,10 @@
     <div class="header mb-4">
         <span class="badge bg-success fs-3 fw-semibold">Categories</span>
     </div>
+    <div class="custom-scrollbar mt-3">
     <div class="container">
 
-        <div class="custom-scrollbar mt-3">
+        
             @for (c of categories; track c.id) {
             <div class="card mb-5 borde border-0 shadow">
                 <div class="card-header rounded-bottom">
@@ -17,6 +18,7 @@
                 </div> -->
             </div>
             }
+            
         </div>
     </div>
 </div>

@@ -49,13 +49,27 @@
   height: 100%;
   object-fit: cover;
 }
-@media screen and (max-width: 1200px) {
-    .custom-scrollbar{
+/* .messages{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+} */
+/* @media screen and (max-width: 1200px) {
+    .messages{
       width: 100% !important;
     }
 }
 @media screen and (min-width: 1200px) {
-  .custom-scrollbar{
+  .messages{
     width: 50% !important;
+  }
+} */
+
+@media screen  and (max-width: 600px){
+  .head{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
