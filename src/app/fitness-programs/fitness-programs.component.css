@@ -32,7 +32,7 @@ select{
 .custom-scrollbar {
     overflow-y: auto;
     max-height: 55vh; /* Postavi maksimalnu visinu ako želiš ograničiti visinu */
-    min-height: 35vh;
+    min-height: 45vh;
     scrollbar-width: thin; /* Mozilla Firefox */
     scrollbar-color: #4452a2 #f9faff; /* Mozilla Firefox */
   }

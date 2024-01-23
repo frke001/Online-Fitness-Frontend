@@ -53,9 +53,12 @@ export class FitnessProgramComponent {
           next: (data) => {
 
             this.ytUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.embedUrl + data.link);
-            let image = imageService.downloadImage(data.imageId);
-            if (image)
+           
+            if (data.imageId){
+              let image = imageService.downloadImage(data.imageId);
               this.programImageUrl = image;
+            }
+              
             this.fitnessProgram = data;
             this.questions = data.questions;
             if (this.isLoggedIn()) {
@@ -142,6 +145,14 @@ export class FitnessProgramComponent {
       return image
     }else{
       return this.defaultUserImage;
+    }
+  }
+  getImage(id: any): string {
+    if(id){
+      let image = this.imageService.downloadImage(id);
+      return image;
+    }else{
+      return this.programImageUrl;
     }
   }
   // getUserImage(id: any): string {

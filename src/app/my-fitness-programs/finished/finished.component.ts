@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class FinishedComponent {
 
   programsFinished: Array<any> = [];
-    defaultImage: string = '../../../assets/defaultFitnes.jpeg'
+    defaultImage: string = '../../../assets/defaultFitnes.jpg'
     constructor(private clientService: ClientService, private snackBarService: SnackBarService,
       private imageService:ImageService){
         this.clientService.getAllFitnessProgramsFinished().subscribe({

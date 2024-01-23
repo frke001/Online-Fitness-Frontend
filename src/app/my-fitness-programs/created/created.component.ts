@@ -17,7 +17,7 @@ export class CreatedComponent {
 
 
   fitnessPrograms: Array<any> = [];
-  defaultImage: string = '../../../assets/defaultFitnes.jpeg'
+  defaultImage: string = '../../../assets/defaultFitnes.jpg'
   constructor(private clientService: ClientService, private snackBarService: SnackBarService, private imageService: ImageService) {
     this.clientService.getAllFitnessPrograms().subscribe({
       next: (data) => {

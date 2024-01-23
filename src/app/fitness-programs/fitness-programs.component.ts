@@ -16,7 +16,7 @@ import { RouterLink } from '@angular/router';
 })
 export class FitnessProgramsComponent {
 
-  defaultImage: string = '../../assets/defaultFitnes.jpeg'
+  defaultImage: string = '../../assets/defaultFitnes.jpg';
 
   length: any = 10;
   pageSize: any = 4;
@@ -126,6 +126,7 @@ export class FitnessProgramsComponent {
   }
 
   getImage(id: any): string {
+    debugger
     if(id){
       let image = this.imageService.downloadImage(id);
       return image
