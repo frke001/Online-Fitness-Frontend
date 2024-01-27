@@ -56,7 +56,7 @@ select{
   }
   .card{
     transition: transform 0.3s;
-    height: 350px;
+    min-height: 350px;
   }
 
   .truncate {

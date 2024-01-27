@@ -147,7 +147,6 @@ export class AddProgramComponent {
   }
 
   extractVideoId(youtubeLink: any): string | null {
-    debugger
     const regex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})$/;
     const match = youtubeLink.match(regex);
   

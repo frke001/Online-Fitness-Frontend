@@ -126,7 +126,6 @@ export class FitnessProgramsComponent {
   }
 
   getImage(id: any): string {
-    debugger
     if(id){
       let image = this.imageService.downloadImage(id);
       return image

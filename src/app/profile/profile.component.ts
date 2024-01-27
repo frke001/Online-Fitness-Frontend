@@ -141,7 +141,6 @@ export class ProfileComponent {
   }
 
   onUpdatePassword() {
-    debugger
     let request = {
       oldPassword: this.oldPassword.value,
       newPassword: this.password.value

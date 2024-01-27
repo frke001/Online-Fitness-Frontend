@@ -14,7 +14,7 @@ export class PdfService {
   generatePdf(){
     return this.http.post(this.baseUrl + this.authService.getId(), {});
   }
-  downloadPdf(): string{
+  downloadPdf(): string {
     return this.baseUrl + this.authService.getId();
   }
 }
