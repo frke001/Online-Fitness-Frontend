@@ -1,27 +1,49 @@
-# OnlineFitness
+# OnlineFitness - Client Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
+This project was generated with Angular CLI version 17.0.8. OnlineFitness is a web application that allows users to access various fitness programs, search for programs, interact with programs, track progress, and create their own programs.
 
-## Development server
+## Running the Application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+To start the development server, use the `ng serve` command. After that, the application will be available at http://localhost:4200/. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Project Structure
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **components**: This directory contains components responsible for the user interface of the application.
+- **services**: Services responsible for communication with the backend of the application.
+- **models**: Definitions of data models used within the application.
+- **guards**: Guards used to control access to certain routes based on user authentication or authorization status.
+- **interceptors**: Interceptors used to intercept HTTP requests and responses for custom handling, such as adding headers, logging, or error handling.
+- **assets**: Directory for static resources like images, icons, etc.
+- **styles**: Directory containing stylesheets for the application.
 
-## Build
+## Building Instructions
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To build the project, use the `ng build` command. The built artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Running Unit Tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+You can execute unit tests using the Karma test runner by running `ng test`.
 
-## Running end-to-end tests
+## Running End-to-End Tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+For end-to-end testing, utilize `ng e2e`. Before running this command, ensure you have added a package that implements end-to-end testing capabilities.
 
-## Further help
+## Additional Information
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+For further details about Angular CLI, utilize `ng help` or visit the [Angular CLI Overview and Command Reference](https://angular.io/cli).
+
+## Application Screenshots
+
+You can include screenshots or images of the application to visually showcase its functionalities or design.
+
+## Functionality
+
+- **Program Search**: Users can search for different fitness programs based on category, difficulty, duration, and other criteria.
+- **Program Details Viewing**: Detailed view of each program, including description, instructors, images, and contact information.
+- **Program Interaction**: Users can ask questions and communicate with other users.
+- **Creating Custom Programs**: Users can create and share their fitness programs with other users.
+
+## Application Architecture
+
+OnlineFitness application is structured using the Angular framework, which facilitates easy management of components, services, guards, interceptors, and other features. This component-based architecture ensures scalability, maintainability, and extensibility of the application.
+
