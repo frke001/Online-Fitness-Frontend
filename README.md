@@ -34,8 +34,10 @@ For further details about Angular CLI, utilize `ng help` or visit the [Angular C
 
 ## Application Screenshots
 
-You can include screenshots or images of the application to visually showcase its functionalities or design.
-
+![image](https://github.com/frke001/Task-scheduler-and-parallel-processing-of-multimedia-data/assets/93668747/1a0347da-d22c-4ce4-9315-5ae34257a441)
+![image](https://github.com/frke001/Task-scheduler-and-parallel-processing-of-multimedia-data/assets/93668747/9590994a-31cd-4dda-be66-3ccc56039ca8)
+![image](https://github.com/frke001/Task-scheduler-and-parallel-processing-of-multimedia-data/assets/93668747/98123e6f-73b4-4e98-8e7e-a9583cabe99e)
+![image](https://github.com/frke001/Task-scheduler-and-parallel-processing-of-multimedia-data/assets/93668747/b82b385c-49e3-4e8f-9542-45cf00cb4573)
 ## Functionality
 
 - **Program Search**: Users can search for different fitness programs based on category, difficulty, duration, and other criteria.
