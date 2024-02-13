@@ -17,17 +17,9 @@ To start the development server, use the `ng serve` command. After that, the app
 - **assets**: Directory for static resources like images, icons, etc.
 - **styles**: Directory containing stylesheets for the application.
 
-## Building Instructions
+## Dependencies Instructions
 
-To build the project, use the `ng build` command. The built artifacts will be stored in the `dist/` directory.
-
-## Running Unit Tests
-
-You can execute unit tests using the Karma test runner by running `ng test`.
-
-## Running End-to-End Tests
-
-For end-to-end testing, utilize `ng e2e`. Before running this command, ensure you have added a package that implements end-to-end testing capabilities.
+To install all dependencies of the project, use the `npm i` command.
 
 ## Additional Information
 
