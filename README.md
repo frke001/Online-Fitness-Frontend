@@ -1,5 +1,6 @@
-# OnlineFitness - Client Application
+# OnlineFitness - Frontend Application
 
+Central platform for accessing and participating in online fitness programs. Enables users to search, participate, and interact with various programs, as well as track progress and create their own programs.
 This project was generated with Angular CLI version 17.0.8. OnlineFitness is a web application that allows users to access various fitness programs, search for programs, interact with programs, track progress, and create their own programs.
 
 ## Running the Application
